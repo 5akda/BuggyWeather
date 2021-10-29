@@ -1,3 +1,15 @@
 <resources>
 	<string name="app_name">BuggyWeather</string>
+
+	<string name="unit_celsius">Celsius</string>
+	<string name="unit_short_celsius">°C</string>
+	<string name="unit_meter_per_sec">m/s</string>
+
+	<string name="unit_fahrenheit">Fahrenheit</string>
+	<string name="unit_short_fahrenheit">°F</string>
+	<string name="unit_miles_per_hour">mph</string>
+
+	<string name="unit_hectopascal">hPa</string>
+	<string name="unit_millimeter">mm</string>
+	<string name="unit_kilometer">km</string>
 </resources>
