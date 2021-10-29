@@ -12,15 +12,16 @@ import java.util.concurrent.TimeUnit
 object NetworkModule: KoinModule {
 	private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 
-	private val logInterceptor = HttpLoggingInterceptor().apply {
-		level = HttpLoggingInterceptor.Level.BODY
+	private fun createClient(): OkHttpClient {
+		val logInterceptor = HttpLoggingInterceptor().apply {
+			level = HttpLoggingInterceptor.Level.BODY
+		}
+		return OkHttpClient.Builder()
+				.addInterceptor(logInterceptor)
+				.readTimeout(60, TimeUnit.SECONDS)
+				.writeTimeout(60, TimeUnit.SECONDS)
+				.build()
 	}
-
-	private fun createClient(): OkHttpClient = OkHttpClient.Builder()
-			.addInterceptor(logInterceptor)
-			.readTimeout(60, TimeUnit.SECONDS)
-			.writeTimeout(60, TimeUnit.SECONDS)
-			.build()
 
 	private fun createRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
 			.baseUrl(BASE_URL)
