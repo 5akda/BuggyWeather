@@ -1,4 +1,4 @@
-package com.example.buggyweather.main
+package com.example.buggyweather.main.presenter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
