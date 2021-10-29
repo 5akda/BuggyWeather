@@ -1,6 +1,7 @@
 package com.example.buggyweather
 
 import android.app.Application
+import com.example.buggyweather.main.MainModule
 import com.example.buggyweather.network.NetworkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -16,6 +17,7 @@ class BuggyWeatherApp : Application() {
 			androidLogger()
 			modules(
 					NetworkModule.provide(),
+					MainModule.provide()
 			)
 		}
 	}

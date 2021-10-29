@@ -1,6 +1,7 @@
 package com.example.buggyweather.network
 
 import com.example.buggyweather.base.KoinModule
+import com.example.buggyweather.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.Module
@@ -10,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object NetworkModule: KoinModule {
-	private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 
 	private fun createClient(): OkHttpClient {
 		val logInterceptor = HttpLoggingInterceptor().apply {
@@ -24,7 +24,7 @@ object NetworkModule: KoinModule {
 	}
 
 	private fun createRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
-			.baseUrl(BASE_URL)
+			.baseUrl(Constants.BASE_URL)
 			.client(client)
 			.addConverterFactory(GsonConverterFactory.create())
 			.build()
