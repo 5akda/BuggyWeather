@@ -1,12 +1,21 @@
 package com.example.buggyweather.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.buggyweather.domain.MeasuringUnits
-import com.example.buggyweather.utils.Constants
 
 class MainViewModel : ViewModel() {
 
-	var cityName: String = Constants.DEFAULT_CITY_NAME
+	private val _cityName = MutableLiveData<String>()
+	val cityName: LiveData<String>
+		get() = _cityName
 
-	var measuringUnits: MeasuringUnits = MeasuringUnits.METRIC
+	private val _measuringUnit = MutableLiveData<MeasuringUnits>()
+	val measuringUnits: LiveData<MeasuringUnits>
+		get() = _measuringUnit
+
+	fun initCityName(cityName: String) {
+		_cityName.postValue(cityName)
+	}
 }
