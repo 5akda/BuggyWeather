@@ -1,4 +1,4 @@
-package com.example.buggyweather
+package com.example.buggyweather.main
 
 import androidx.lifecycle.ViewModel
 import com.example.buggyweather.domain.MeasuringUnits
