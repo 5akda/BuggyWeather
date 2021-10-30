@@ -3,9 +3,15 @@ package com.example.buggyweather.main.presenter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.MeasuringUnits
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+		private val getMeasuringUnitsUseCase: UseCase<Unit, MeasuringUnits>,
+		private val saveMeasuringUnitsUseCase: UseCase<MeasuringUnits, MeasuringUnits>
+) : ViewModel() {
 
 	private val _cityName = MutableLiveData<String>()
 	val cityName: LiveData<String>
@@ -15,7 +21,12 @@ class MainViewModel : ViewModel() {
 	val measuringUnits: LiveData<MeasuringUnits>
 		get() = _measuringUnit
 
-	fun initCityName(cityName: String) {
-		_cityName.postValue(cityName)
+	fun initCityName(city: String) = viewModelScope.launch {
+		_cityName.postValue(city)
+		getMeasuringUnit()
+	}
+
+	private fun getMeasuringUnit() = viewModelScope.launch {
+		_measuringUnit.postValue(getMeasuringUnitsUseCase.execute(Unit))
 	}
 }
