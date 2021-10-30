@@ -1,5 +1,5 @@
 package com.example.buggyweather.base
 
 interface UseCase<REQUEST, RESPONSE> {
-	fun execute(request: REQUEST): RESPONSE
+	suspend fun execute(request: REQUEST): RESPONSE
 }
