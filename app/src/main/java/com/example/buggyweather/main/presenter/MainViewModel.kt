@@ -10,7 +10,9 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
 		private val getMeasuringUnitsUseCase: UseCase<Unit, MeasuringUnits>,
-		private val saveMeasuringUnitsUseCase: UseCase<MeasuringUnits, MeasuringUnits>
+		private val saveMeasuringUnitsUseCase: UseCase<MeasuringUnits, MeasuringUnits>,
+		private val getLastCityUseCase: UseCase<Unit, String>,
+		private val saveLastCityUseCase: UseCase<String, String>
 ) : ViewModel() {
 
 	private val _cityName = MutableLiveData<String>()
@@ -21,12 +23,8 @@ class MainViewModel(
 	val measuringUnits: LiveData<MeasuringUnits>
 		get() = _measuringUnit
 
-	fun initCityName(city: String) = viewModelScope.launch {
-		_cityName.postValue(city)
-		getMeasuringUnit()
-	}
-
-	private fun getMeasuringUnit() = viewModelScope.launch {
+	fun initCityNameAndUnits() = viewModelScope.launch {
+		_cityName.postValue(getLastCityUseCase.execute(Unit))
 		_measuringUnit.postValue(getMeasuringUnitsUseCase.execute(Unit))
 	}
 }
