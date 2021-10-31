@@ -1,6 +1,7 @@
 package com.example.buggyweather
 
 import android.app.Application
+import com.example.buggyweather.home.HomeModule
 import com.example.buggyweather.main.MainModule
 import com.example.buggyweather.network.NetworkModule
 import com.example.buggyweather.preference.SharedPreferenceModule
@@ -12,10 +13,6 @@ import org.koin.dsl.module
 
 class BuggyWeatherApp : Application() {
 
-	private val appModule = module {
-		single { applicationContext }
-	}
-
 	override fun onCreate() {
 		super.onCreate()
 
@@ -23,10 +20,10 @@ class BuggyWeatherApp : Application() {
 			androidContext(this@BuggyWeatherApp)
 			androidLogger()
 			modules(
-					appModule,
 					NetworkModule.provide(),
 					MainModule.provide(),
-					SharedPreferenceModule.provide()
+					SharedPreferenceModule.provide(),
+					HomeModule.provide()
 			)
 		}
 	}

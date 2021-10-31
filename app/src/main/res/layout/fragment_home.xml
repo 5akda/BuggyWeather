@@ -28,8 +28,27 @@
 		app:layout_constraintTop_toTopOf="parent"
 		android:src="@drawable/ic_search_48" />
 
-	<androidx.core.widget.NestedScrollView>
+	<ProgressBar
+		android:id="@+id/loading"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:background="?android:windowBackground"
+		android:elevation="@dimen/elevation_top"
+		android:visibility="gone"
+		app:layout_constraintTop_toBottomOf="@id/btnSearch"
+		app:layout_constraintBottom_toBottomOf="parent"/>
 
-	</androidx.core.widget.NestedScrollView>
+	<FrameLayout
+		android:id="@+id/errorContainer"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:elevation="@dimen/elevation_top"
+		android:visibility="gone"
+		app:layout_constraintTop_toBottomOf="@id/btnSearch"
+		app:layout_constraintBottom_toBottomOf="parent" >
 
+		<include
+			android:id="@+id/error"
+			layout="@layout/layout_error"/>
+	</FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
