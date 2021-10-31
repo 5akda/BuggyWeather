@@ -27,4 +27,8 @@ class MainViewModel(
 		_cityName.postValue(getLastCityUseCase.execute(Unit))
 		_measuringUnit.postValue(getMeasuringUnitsUseCase.execute(Unit))
 	}
+
+	fun setCityName(cityName: String?) {
+		_cityName.postValue(cityName?: "")
+	}
 }

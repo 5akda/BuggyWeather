@@ -8,7 +8,7 @@ class SaveMeasuringUnitsUseCase(
 		private val measuringUnitsDataSource: MeasuringUnitsDataSource
 ) : UseCase<MeasuringUnits, MeasuringUnits>() {
 
-	override fun create(request: MeasuringUnits): MeasuringUnits {
+	override suspend fun create(request: MeasuringUnits): MeasuringUnits {
 		return measuringUnitsDataSource.saveUnits(request)
 	}
 }
