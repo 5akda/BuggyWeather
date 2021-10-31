@@ -3,7 +3,6 @@ package com.example.buggyweather.main.presenter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.buggyweather.databinding.ActivityMainBinding
-import com.example.buggyweather.utils.Constants
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +16,6 @@ class MainActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(binding.root)
 
-		sharedViewModel.initCityName(Constants.DEFAULT_CITY_NAME)
+		sharedViewModel.initCityNameAndUnits()
 	}
 }
