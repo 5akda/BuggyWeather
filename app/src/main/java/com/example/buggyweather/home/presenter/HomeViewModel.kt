@@ -35,7 +35,7 @@ class HomeViewModel(
 			when(it) {
 				is NotFoundException -> _exception.postValue(it.msg)
 				is RemoteException -> _exception.postValue(it.msg)
-				else -> _exception.postValue(it.stackTraceToString())
+				else -> _exception.postValue(it.message)
 			}
 		}
 	}

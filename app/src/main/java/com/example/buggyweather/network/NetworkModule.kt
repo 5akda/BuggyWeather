@@ -18,8 +18,8 @@ object NetworkModule: KoinModule {
 		}
 		return OkHttpClient.Builder()
 				.addInterceptor(logInterceptor)
-				.readTimeout(60, TimeUnit.SECONDS)
-				.writeTimeout(60, TimeUnit.SECONDS)
+				.readTimeout(10, TimeUnit.SECONDS)
+				.writeTimeout(10, TimeUnit.SECONDS)
 				.build()
 	}
 
