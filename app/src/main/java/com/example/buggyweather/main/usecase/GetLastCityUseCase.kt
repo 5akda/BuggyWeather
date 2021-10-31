@@ -7,7 +7,7 @@ class GetLastCityUseCase(
 		private val lastCityDataSource: LastCityDataSource
 ) : UseCase<Unit, String>() {
 
-	override fun create(request: Unit): String {
+	override suspend fun create(request: Unit): String {
 		return lastCityDataSource.getCity()
 	}
 }

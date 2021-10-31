@@ -5,7 +5,7 @@ import kotlinx.coroutines.withContext
 
 abstract class UseCase<REQUEST, RESPONSE> {
 
-	protected abstract fun create(request: REQUEST): RESPONSE
+	protected abstract suspend fun create(request: REQUEST): RESPONSE
 
 	suspend fun execute(request: REQUEST): RESPONSE {
 		return withContext(Dispatchers.IO) {
