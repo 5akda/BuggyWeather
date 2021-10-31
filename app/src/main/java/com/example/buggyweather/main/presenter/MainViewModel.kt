@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.utils.Constants
 import kotlinx.coroutines.launch
 
 class MainViewModel(
 		private val getMeasuringUnitsUseCase: UseCase<Unit, MeasuringUnits>,
 		private val saveMeasuringUnitsUseCase: UseCase<MeasuringUnits, MeasuringUnits>,
 		private val getLastCityUseCase: UseCase<Unit, String>,
-		private val saveLastCityUseCase: UseCase<String, String>
+		private val saveLastCityUseCase: UseCase<String, Unit>
 ) : ViewModel() {
 
 	private val _cityName = MutableLiveData<String>()
@@ -30,5 +31,9 @@ class MainViewModel(
 
 	fun setCityName(cityName: String?) {
 		_cityName.postValue(cityName?: "")
+	}
+
+	fun saveLastCityName(cityName: String?) = viewModelScope.launch {
+		saveLastCityUseCase.execute(cityName?: Constants.DEFAULT_CITY_NAME)
 	}
 }

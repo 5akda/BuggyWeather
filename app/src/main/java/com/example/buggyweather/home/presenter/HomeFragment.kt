@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment() {
 			)
 		}
 		homeViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
-			// Do Something
+			sharedViewModel.saveLastCityName(sharedViewModel.cityName.value)
 			hideLoading()
 		}
 		homeViewModel.exception.observe(viewLifecycleOwner) { errorMessage ->
