@@ -5,9 +5,9 @@ import com.example.buggyweather.main.repository.LastCityDataSource
 
 class SaveLastCityUseCase(
 		private val lastCityDataSource: LastCityDataSource
-) : UseCase<String, String>() {
+) : UseCase<String, Unit>() {
 
-	override suspend fun create(request: String): String {
-		return lastCityDataSource.saveCity(request)
+	override suspend fun create(request: String) {
+		lastCityDataSource.saveCity(request)
 	}
 }

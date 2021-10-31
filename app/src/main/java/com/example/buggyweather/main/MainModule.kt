@@ -46,7 +46,7 @@ object MainModule : KoinModule {
 		single<UseCase<Unit, String>>(named(GET_CITY_USE_CASE)) {
 			GetLastCityUseCase(get())
 		}
-		single<UseCase<String, String>>(named(SAVE_CITY_USE_CASE)) {
+		single<UseCase<String, Unit>>(named(SAVE_CITY_USE_CASE)) {
 			SaveLastCityUseCase(get())
 		}
 

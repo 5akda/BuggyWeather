@@ -7,11 +7,10 @@ class LastCityRepository(
 		private val settingSharedPref: SharedPreferences
 ) : LastCityDataSource {
 
-	override fun saveCity(cityName: String): String {
+	override fun saveCity(cityName: String) {
 		settingSharedPref.edit()
 				.putString(KEY_LAST_CITY, cityName)
 				.apply()
-		return getCity()
 	}
 
 	override fun getCity(): String {
