@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.presenter
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.buggyweather.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
