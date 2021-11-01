@@ -25,7 +25,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/space_x_small"
 			android:textAlignment="center"
-			android:textSize="@dimen/text_size_error" />
+			android:textSize="@dimen/text_size_normal" />
 	</LinearLayout>
 
 	<androidx.constraintlayout.widget.Guideline

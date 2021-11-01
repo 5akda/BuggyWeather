@@ -8,13 +8,14 @@
 	tools:context=".home.presenter.HomeFragment">
 
 	<EditText
-		android:id="@+id/txtCtiyName"
+		android:id="@+id/txtCityName"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/space_xx_small"
 		android:inputType="textCapWords"
 		android:textSize="@dimen/text_size_search"
 		android:textStyle="bold"
+		android:fontFamily="sans-serif"
 		app:layout_constraintBottom_toBottomOf="@id/btnSearch"
 		app:layout_constraintEnd_toStartOf="@id/btnSearch"
 		app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +25,10 @@
 		android:id="@+id/errorContainer"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:elevation="@dimen/elevation_top"
+		android:elevation="@dimen/elevation_2"
+		android:outlineProvider="none"
 		android:visibility="gone"
+		android:background="?android:windowBackground"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/btnSearch">
 
@@ -34,11 +37,12 @@
 			layout="@layout/layout_error" />
 	</FrameLayout>
 
-	<ImageView
+	<ImageButton
 		android:id="@+id/btnSearch"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:src="@drawable/ic_search_48"
+		android:background="@color/transparent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,8 +51,222 @@
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:background="?android:windowBackground"
-		android:elevation="@dimen/elevation_top"
+		android:elevation="@dimen/elevation_2"
+		android:outlineProvider="none"
 		android:visibility="gone"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/btnSearch" />
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:paddingHorizontal="@dimen/space_xx_small"
+		app:layout_constraintTop_toBottomOf="@id/btnSearch">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<TextView
+				android:id="@+id/txtCurrentTemp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/text_size_current_temp"
+				android:textStyle="bold"
+				android:layout_marginStart="@dimen/space_large"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				tools:text="25" />
+
+			<TextView
+				android:id="@+id/txtCurrentUnit"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/text_size_xx_large"
+				android:layout_marginTop="@dimen/space_x_large"
+				android:layout_marginStart="@dimen/space_xx_small"
+				app:layout_constraintTop_toTopOf="@id/txtCurrentTemp"
+				app:layout_constraintStart_toEndOf="@id/txtCurrentTemp"
+				tools:text="°C" />
+
+			<ImageView
+				android:id="@+id/imgCurrentIcon"
+				android:src="@drawable/ic_placeholder"
+				app:layout_constraintDimensionRatio="H,1:1"
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@id/txtCurrentTemp"
+				app:layout_constraintBottom_toBottomOf="@id/txtCurrentTemp"/>
+
+			<TextView
+				android:id="@+id/txtMaxAndMinTemp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/space_xxx_small"
+				android:textStyle="bold"
+				android:textSize="@dimen/text_size_large"
+				app:layout_constraintTop_toBottomOf="@id/txtCurrentTemp"
+				app:layout_constraintStart_toStartOf="@id/txtCurrentTemp"
+				tools:text="30°C / 25°C"/>
+
+			<TextView
+				android:id="@+id/txtDescription"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/space_xxx_small"
+				android:textStyle="bold"
+				android:textAllCaps="true"
+				android:textSize="@dimen/text_size_large"
+				app:layout_constraintTop_toBottomOf="@id/txtMaxAndMinTemp"
+				app:layout_constraintStart_toStartOf="@id/txtCurrentTemp"
+				tools:text="overcast clouds"/>
+
+			<LinearLayout
+				android:id="@+id/leftLinearLayout"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/space_xx_large"
+				android:orientation="vertical"
+				app:layout_constraintTop_toBottomOf="@id/txtDescription"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="@id/guideline">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_size_normal"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:text="@string/view_humidity" />
+
+				<TextView
+					android:id="@+id/txtHumidity"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_size_x_large"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:textStyle="bold"
+					tools:text="64%"/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/space_xx_large"
+					android:textSize="@dimen/text_size_normal"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:text="@string/view_visibility" />
+
+				<TextView
+					android:id="@+id/txtVisibility"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_size_x_large"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:textStyle="bold"
+					tools:text="10 km"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/space_xx_large"
+				android:orientation="vertical"
+				app:layout_constraintTop_toBottomOf="@id/txtDescription"
+				app:layout_constraintStart_toStartOf="@id/guideline"
+				app:layout_constraintEnd_toEndOf="parent">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_size_normal"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:text="@string/view_feels_like" />
+
+				<TextView
+					android:id="@+id/txtFeelLike"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_size_x_large"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:textStyle="bold"
+					tools:text="27°C"/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/space_xx_large"
+					android:textSize="@dimen/text_size_normal"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:text="@string/view_wind" />
+
+				<TextView
+					android:id="@+id/txtWind"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_size_x_large"
+					android:textAlignment="center"
+					android:textAllCaps="true"
+					android:textStyle="bold"
+					tools:text="1 m/s"/>
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/txtSetting"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/view_units_setting"
+				android:textSize="@dimen/text_size_normal"
+				android:textStyle="bold"
+				android:textAlignment="textEnd"
+				app:layout_constraintStart_toStartOf="@id/txtDescription"
+				app:layout_constraintTop_toTopOf="@id/radioGroup"
+				app:layout_constraintBottom_toBottomOf="@+id/radioGroup"/>
+			
+			<RadioGroup
+				android:id="@+id/radioGroup"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/space_xx_large"
+				android:layout_marginStart="@dimen/space_normal"
+				app:layout_constraintTop_toBottomOf="@id/leftLinearLayout"
+				app:layout_constraintStart_toEndOf="@id/txtSetting"
+				app:layout_constraintEnd_toEndOf="parent">
+
+				<RadioButton
+					android:id="@+id/radioMetric"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:buttonTint="@color/orange"
+					android:textColor="?attr/colorPrimary"
+					android:textSize="@dimen/text_size_normal"
+					android:text="@string/unit_celsius"/>
+
+				<RadioButton
+					android:id="@+id/radioImperial"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:buttonTint="@color/orange"
+					android:textColor="?attr/colorPrimary"
+					android:textSize="@dimen/text_size_normal"
+					android:text="@string/unit_fahrenheit"/>
+
+			</RadioGroup>
+
+			<androidx.constraintlayout.widget.Guideline
+				android:id="@+id/guideline"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				app:layout_constraintGuide_percent="0.5" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
