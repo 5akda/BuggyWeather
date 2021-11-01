@@ -1,14 +1,14 @@
 package com.example.buggyweather.home.repository
 
 import android.util.Log
+import androidx.arch.core.util.Function
 import com.example.buggyweather.domain.CurrentWeather
+import com.example.buggyweather.network.KnownExceptionMessage
+import com.example.buggyweather.network.exception.BadRequestException
 import com.example.buggyweather.network.exception.NotFoundException
 import com.example.buggyweather.network.exception.RemoteException
 import retrofit2.Response
 import java.net.HttpURLConnection
-import androidx.arch.core.util.Function
-import com.example.buggyweather.network.KnownExceptionMessage
-import com.example.buggyweather.network.exception.BadRequestException
 
 class CurrentWeatherMapper: Function<Response<CurrentWeather>, CurrentWeather> {
 	override fun apply(response: Response<CurrentWeather>): CurrentWeather {

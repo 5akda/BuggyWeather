@@ -8,8 +8,6 @@ import com.example.buggyweather.preference.SharedPreferenceModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
 
 class BuggyWeatherApp : Application() {
 

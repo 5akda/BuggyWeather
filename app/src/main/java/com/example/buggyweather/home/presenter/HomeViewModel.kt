@@ -11,7 +11,6 @@ import com.example.buggyweather.network.exception.BadRequestException
 import com.example.buggyweather.network.exception.NotFoundException
 import com.example.buggyweather.network.exception.RemoteException
 import kotlinx.coroutines.launch
-import java.net.UnknownHostException
 
 class HomeViewModel(
 		private val getCurrentWeatherUseCase: UseCase<Pair<String, String>, CurrentWeather>
