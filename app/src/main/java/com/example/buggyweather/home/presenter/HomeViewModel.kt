@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.network.exception.BadRequestException
 import com.example.buggyweather.network.exception.NotFoundException
 import com.example.buggyweather.network.exception.RemoteException
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
 class HomeViewModel(
 		private val getCurrentWeatherUseCase: UseCase<Pair<String, String>, CurrentWeather>
@@ -25,18 +27,23 @@ class HomeViewModel(
 
 	fun getCurrentWeather(cityName: String,
 	                      measuringUnits: MeasuringUnits?) = viewModelScope.launch {
-		kotlin.runCatching {
-			getCurrentWeatherUseCase.execute(
-					Pair(cityName, measuringUnits?.name ?: MeasuringUnits.METRIC.name)
-			)
-		}.onSuccess {
-			_currentWeather.postValue(it)
-		}.onFailure {
-			when(it) {
-				is NotFoundException -> _exception.postValue(it.msg)
-				is RemoteException -> _exception.postValue(it.msg)
-				else -> _exception.postValue(it.message)
-			}
+		runCatching {
+			getCurrentWeatherUseCase.execute(Pair(cityName, measuringUnits?.name ?: MeasuringUnits.METRIC.name))
+		}
+		.onSuccess(::succeedCurrentWeather)
+		.onFailure(::failCurrentWeather)
+	}
+
+	private fun succeedCurrentWeather(currentWeather: CurrentWeather) {
+		_currentWeather.postValue(currentWeather)
+	}
+
+	private fun failCurrentWeather(throwable: Throwable) {
+		when(throwable) {
+			is NotFoundException,
+			is BadRequestException,
+			is RemoteException -> _exception.postValue(throwable.message)
+			else -> _exception.postValue(throwable.message)
 		}
 	}
 }
