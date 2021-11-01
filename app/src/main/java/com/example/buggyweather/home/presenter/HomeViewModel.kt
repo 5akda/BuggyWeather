@@ -27,11 +27,10 @@ class HomeViewModel(
 
 	fun getCurrentWeather(cityName: String,
 	                      measuringUnits: MeasuringUnits?) = viewModelScope.launch {
-		runCatching {
-			getCurrentWeatherUseCase.execute(Pair(cityName, measuringUnits?.name ?: MeasuringUnits.METRIC.name))
-		}
-		.onSuccess(::succeedCurrentWeather)
-		.onFailure(::failCurrentWeather)
+		val request = Pair(cityName, measuringUnits?.name ?: MeasuringUnits.METRIC.name)
+		runCatching { getCurrentWeatherUseCase.execute(request) }
+				.onSuccess(::succeedCurrentWeather)
+				.onFailure(::failCurrentWeather)
 	}
 
 	private fun succeedCurrentWeather(currentWeather: CurrentWeather) {
