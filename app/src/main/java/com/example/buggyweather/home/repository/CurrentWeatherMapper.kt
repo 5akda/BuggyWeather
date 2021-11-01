@@ -1,6 +1,5 @@
 package com.example.buggyweather.home.repository
 
-import android.util.Log
 import androidx.arch.core.util.Function
 import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.network.KnownExceptionMessage
@@ -12,7 +11,6 @@ import java.net.HttpURLConnection
 
 class CurrentWeatherMapper: Function<Response<CurrentWeather>, CurrentWeather> {
 	override fun apply(response: Response<CurrentWeather>): CurrentWeather {
-		Log.i("ERROR ${response.code()}", response.message())
 		return when (response.code()) {
 			HttpURLConnection.HTTP_OK -> {
 				response.body() ?: throw Throwable(KnownExceptionMessage.COMMON)

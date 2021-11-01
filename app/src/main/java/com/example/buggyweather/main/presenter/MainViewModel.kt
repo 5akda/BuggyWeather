@@ -16,35 +16,41 @@ class MainViewModel(
 		private val saveLastCityUseCase: UseCase<String, Unit>
 ) : ViewModel() {
 
-	private val _cityName = MutableLiveData<String>()
-	val cityName: LiveData<String>
-		get() = _cityName
-
-	private val _measuringUnit = MutableLiveData<MeasuringUnits>()
-	val measuringUnits: LiveData<MeasuringUnits>
-		get() = _measuringUnit
+	private val _cityNameAndUnits = MutableLiveData<Pair<String, MeasuringUnits>>()
+	val cityNameAndUnits: LiveData<Pair<String, MeasuringUnits>>
+		get() = _cityNameAndUnits
 
 	fun initCityNameAndUnits() = viewModelScope.launch {
-		runCatching { getLastCityUseCase.execute(Unit) }
-				.onSuccess(::setCityName)
-
-		runCatching { getMeasuringUnitsUseCase.execute(Unit) }
-				.onSuccess(::setMeasuringUnits)
+		runCatching {
+			Pair(getLastCityUseCase.execute(Unit), getMeasuringUnitsUseCase.execute(Unit))
+		}.onSuccess(::setCityNameAndUnits)
 	}
 
-	fun setCityName(cityName: String) {
-		_cityName.postValue(cityName)
+	private fun setCityNameAndUnits(pair: Pair<String, MeasuringUnits>) {
+		_cityNameAndUnits.postValue(pair)
+	}
+
+	fun setCityName(cityName: String)  {
+		cityNameAndUnits.value?.second?.let {
+			_cityNameAndUnits.postValue(Pair(cityName, it))
+		}
 	}
 
 	fun saveLastCityName() = viewModelScope.launch {
-		saveLastCityUseCase.execute(cityName.value ?: Constants.DEFAULT_CITY_NAME)
+		cityNameAndUnits.value?.first?.let {
+			saveLastCityUseCase.execute(it)
+		}
 	}
 
 	fun setMeasuringUnits(units: MeasuringUnits)  {
-		_measuringUnit.postValue(units)
+		cityNameAndUnits.value?.first?.let {
+			_cityNameAndUnits.postValue(Pair(it, units))
+		}
 	}
 
 	fun saveSelectedUnits() = viewModelScope.launch {
-		saveMeasuringUnitsUseCase.execute(measuringUnits.value ?: MeasuringUnits.METRIC)
+		cityNameAndUnits.value?.second?.let {
+			saveMeasuringUnitsUseCase.execute(it)
+		}
 	}
 }

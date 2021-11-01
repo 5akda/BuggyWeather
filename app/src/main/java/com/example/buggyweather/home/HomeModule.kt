@@ -4,6 +4,7 @@ import androidx.arch.core.util.Function
 import com.example.buggyweather.base.KoinModule
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.CurrentWeather
+import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.home.presenter.HomeViewModel
 import com.example.buggyweather.home.repository.CurrentWeatherDataSource
 import com.example.buggyweather.home.repository.CurrentWeatherMapper
@@ -35,7 +36,7 @@ object HomeModule : KoinModule {
 		single<CurrentWeatherDataSource> {
 			CurrentWeatherRepository(get(), get())
 		}
-		single<UseCase<Pair<String, String>,CurrentWeather>> {
+		single<UseCase<Pair<String, MeasuringUnits>,CurrentWeather>> {
 			GetCurrentWeatherUseCase(get())
 		}
 		viewModel {
