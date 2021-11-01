@@ -8,6 +8,7 @@ import com.example.buggyweather.R
 import com.example.buggyweather.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentHomeBinding
 import com.example.buggyweather.domain.CurrentWeather
+import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.utils.hideKeyboard
 import com.example.buggyweather.utils.loadWeatherIcon
@@ -42,6 +43,18 @@ class HomeFragment : BaseFragment() {
 			)
 		}
 
+		sharedViewModel.measuringUnits.observe(viewLifecycleOwner) { units ->
+			when(units) {
+				MeasuringUnits.IMPERIAL -> binding.radioGroup.check(R.id.radioImperial)
+				else -> binding.radioGroup.check(R.id.radioMetric)
+			}
+			homeViewModel.getCurrentWeather(
+					cityName = sharedViewModel.cityName.value,
+					measuringUnits = units
+			)
+			sharedViewModel.saveSelectedUnits()
+		}
+
 		homeViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
 			bindCurrentWeather(currentWeather)
 			sharedViewModel.saveLastCityName()
@@ -62,6 +75,13 @@ class HomeFragment : BaseFragment() {
 
 		binding.btnSearch.setOnClickListener {
 			processSearch()
+		}
+
+		binding.radioGroup.setOnCheckedChangeListener { _, i ->
+			when(i) {
+				R.id.radioImperial -> sharedViewModel.setMeasuringUnits(MeasuringUnits.IMPERIAL)
+				else -> sharedViewModel.setMeasuringUnits(MeasuringUnits.METRIC)
+			}
 		}
 	}
 

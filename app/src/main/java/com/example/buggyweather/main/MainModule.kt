@@ -34,7 +34,7 @@ object MainModule : KoinModule {
 		single<UseCase<Unit, MeasuringUnits>>(named(GET_UNITS_USE_CASE)) {
 			GetMeasuringUnitsUseCase(get())
 		}
-		single<UseCase<MeasuringUnits, MeasuringUnits>>(named(SAVE_UNITS_USE_CASE)) {
+		single<UseCase<MeasuringUnits, Unit>>(named(SAVE_UNITS_USE_CASE)) {
 			SaveMeasuringUnitsUseCase(get())
 		}
 

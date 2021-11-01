@@ -4,6 +4,6 @@ import com.example.buggyweather.domain.MeasuringUnits
 
 interface MeasuringUnitsDataSource {
 
-	fun saveUnits(units: MeasuringUnits): MeasuringUnits
-	fun getUnits(): MeasuringUnits
+	suspend fun saveUnits(units: MeasuringUnits)
+	suspend fun getUnits(): MeasuringUnits
 }

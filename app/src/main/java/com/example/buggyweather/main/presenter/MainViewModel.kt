@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
 		private val getMeasuringUnitsUseCase: UseCase<Unit, MeasuringUnits>,
-		private val saveMeasuringUnitsUseCase: UseCase<MeasuringUnits, MeasuringUnits>,
+		private val saveMeasuringUnitsUseCase: UseCase<MeasuringUnits, Unit>,
 		private val getLastCityUseCase: UseCase<Unit, String>,
 		private val saveLastCityUseCase: UseCase<String, Unit>
 ) : ViewModel() {
@@ -40,7 +40,7 @@ class MainViewModel(
 		saveLastCityUseCase.execute(cityName.value ?: Constants.DEFAULT_CITY_NAME)
 	}
 
-	fun setMeasuringUnits(units: MeasuringUnits) {
+	fun setMeasuringUnits(units: MeasuringUnits)  {
 		_measuringUnit.postValue(units)
 	}
 
