@@ -16,8 +16,8 @@
 		<!-- Status bar color. -->
 		<item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 		<!-- Customize your theme here. -->
-
-		<item name="android:fontFamily">sans-serif-condensed</item>
 		<item name="textAllCaps">true</item>
+		<item name="android:fontFamily">sans-serif-condensed</item>
+		<item name="android:buttonTint">@color/orange</item>
 	</style>
 </resources>

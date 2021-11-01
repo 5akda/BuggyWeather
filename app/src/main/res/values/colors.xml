@@ -6,9 +6,9 @@
 	<color name="orange">#D86E42</color>
 	<color name="trans_orange">#55D86E42</color>
 	<color name="teal">#32938F</color>
-	<color name="main_light">#DACCB8</color>
+	<color name="main_light">#E0CCB2</color>
 	<color name="main_semi_light">#C1B4A0</color>
-	<color name="main_dark">#302D2A</color>
+	<color name="main_dark">#322D2A</color>
 	<color name="main_semi_dark">#47433F</color>
 
 	<color name="transparent">#00000000</color>

@@ -4,7 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:padding="@dimen/space_large"
+	android:paddingHorizontal="@dimen/space_large"
+	android:paddingTop="@dimen/space_large"
 	tools:context=".home.presenter.HomeFragment">
 
 	<EditText
@@ -12,10 +13,10 @@
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/space_xx_small"
+		android:fontFamily="sans-serif"
 		android:inputType="textCapWords"
 		android:textSize="@dimen/text_size_search"
 		android:textStyle="bold"
-		android:fontFamily="sans-serif"
 		app:layout_constraintBottom_toBottomOf="@id/btnSearch"
 		app:layout_constraintEnd_toStartOf="@id/btnSearch"
 		app:layout_constraintStart_toStartOf="parent"
@@ -25,10 +26,10 @@
 		android:id="@+id/errorContainer"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
+		android:background="?android:windowBackground"
 		android:elevation="@dimen/elevation_2"
 		android:outlineProvider="none"
 		android:visibility="gone"
-		android:background="?android:windowBackground"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/btnSearch">
 
@@ -41,8 +42,8 @@
 		android:id="@+id/btnSearch"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:src="@drawable/ic_search_48"
 		android:background="@color/transparent"
+		android:src="@drawable/ic_search_48"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,60 +68,22 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-			<TextView
-				android:id="@+id/txtCurrentTemp"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="@dimen/text_size_current_temp"
-				android:textStyle="bold"
-				android:layout_marginStart="@dimen/space_large"
-				app:layout_constraintTop_toTopOf="parent"
-				app:layout_constraintStart_toStartOf="parent"
-				tools:text="25" />
-
-			<TextView
-				android:id="@+id/txtCurrentUnit"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="@dimen/text_size_xx_large"
-				android:layout_marginTop="@dimen/space_x_large"
-				android:layout_marginStart="@dimen/space_xx_small"
-				app:layout_constraintTop_toTopOf="@id/txtCurrentTemp"
-				app:layout_constraintStart_toEndOf="@id/txtCurrentTemp"
-				tools:text="°C" />
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_marginTop="@dimen/space_xxxx_large"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintTop_toTopOf="@id/btnWholeDay" />
 
 			<ImageView
 				android:id="@+id/imgCurrentIcon"
-				android:src="@drawable/ic_placeholder"
-				app:layout_constraintDimensionRatio="H,1:1"
 				android:layout_width="0dp"
 				android:layout_height="0dp"
+				android:src="@drawable/ic_placeholder"
+				app:layout_constraintBottom_toBottomOf="@id/txtCurrentTemp"
+				app:layout_constraintDimensionRatio="1:1"
 				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintTop_toTopOf="@id/txtCurrentTemp"
-				app:layout_constraintBottom_toBottomOf="@id/txtCurrentTemp"/>
-
-			<TextView
-				android:id="@+id/txtMaxAndMinTemp"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="@dimen/space_xxx_small"
-				android:textStyle="bold"
-				android:textSize="@dimen/text_size_large"
-				app:layout_constraintTop_toBottomOf="@id/txtCurrentTemp"
-				app:layout_constraintStart_toStartOf="@id/txtCurrentTemp"
-				tools:text="30°C / 25°C"/>
-
-			<TextView
-				android:id="@+id/txtDescription"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="@dimen/space_xxx_small"
-				android:textStyle="bold"
-				android:textAllCaps="true"
-				android:textSize="@dimen/text_size_large"
-				app:layout_constraintTop_toBottomOf="@id/txtMaxAndMinTemp"
-				app:layout_constraintStart_toStartOf="@id/txtCurrentTemp"
-				tools:text="overcast clouds"/>
+				app:layout_constraintTop_toTopOf="@id/txtCurrentTemp" />
 
 			<LinearLayout
 				android:id="@+id/leftLinearLayout"
@@ -128,46 +91,46 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/space_xx_large"
 				android:orientation="vertical"
-				app:layout_constraintTop_toBottomOf="@id/txtDescription"
+				app:layout_constraintEnd_toEndOf="@id/guideline"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintEnd_toEndOf="@id/guideline">
+				app:layout_constraintTop_toBottomOf="@id/txtDescription">
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/text_size_normal"
+					android:text="@string/view_humidity"
 					android:textAlignment="center"
 					android:textAllCaps="true"
-					android:text="@string/view_humidity" />
+					android:textSize="@dimen/text_size_normal" />
 
 				<TextView
 					android:id="@+id/txtHumidity"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/text_size_x_large"
 					android:textAlignment="center"
 					android:textAllCaps="true"
+					android:textSize="@dimen/text_size_x_large"
 					android:textStyle="bold"
-					tools:text="64%"/>
+					tools:text="64%" />
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/space_xx_large"
-					android:textSize="@dimen/text_size_normal"
+					android:text="@string/view_visibility"
 					android:textAlignment="center"
 					android:textAllCaps="true"
-					android:text="@string/view_visibility" />
+					android:textSize="@dimen/text_size_normal" />
 
 				<TextView
 					android:id="@+id/txtVisibility"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/text_size_x_large"
 					android:textAlignment="center"
 					android:textAllCaps="true"
+					android:textSize="@dimen/text_size_x_large"
 					android:textStyle="bold"
-					tools:text="10 km"/>
+					tools:text="10 km" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -175,89 +138,142 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/space_xx_large"
 				android:orientation="vertical"
-				app:layout_constraintTop_toBottomOf="@id/txtDescription"
+				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="@id/guideline"
-				app:layout_constraintEnd_toEndOf="parent">
+				app:layout_constraintTop_toBottomOf="@id/txtDescription">
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/text_size_normal"
+					android:text="@string/view_feels_like"
 					android:textAlignment="center"
 					android:textAllCaps="true"
-					android:text="@string/view_feels_like" />
+					android:textSize="@dimen/text_size_normal" />
 
 				<TextView
 					android:id="@+id/txtFeelLike"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/text_size_x_large"
 					android:textAlignment="center"
 					android:textAllCaps="true"
+					android:textSize="@dimen/text_size_x_large"
 					android:textStyle="bold"
-					tools:text="27°C"/>
+					tools:text="27°C" />
 
 				<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/space_xx_large"
-					android:textSize="@dimen/text_size_normal"
+					android:text="@string/view_wind"
 					android:textAlignment="center"
 					android:textAllCaps="true"
-					android:text="@string/view_wind" />
+					android:textSize="@dimen/text_size_normal" />
 
 				<TextView
 					android:id="@+id/txtWind"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="@dimen/text_size_x_large"
 					android:textAlignment="center"
 					android:textAllCaps="true"
+					android:textSize="@dimen/text_size_x_large"
 					android:textStyle="bold"
-					tools:text="1 m/s"/>
+					tools:text="1 m/s" />
 			</LinearLayout>
+
+			<RadioGroup
+				android:id="@+id/radioGroup"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/space_normal"
+				android:layout_marginTop="@dimen/space_xx_large"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@id/txtSetting"
+				app:layout_constraintTop_toBottomOf="@id/leftLinearLayout">
+
+				<RadioButton
+					android:id="@+id/radioMetric"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/unit_celsius"
+					android:textSize="@dimen/text_size_small" />
+
+				<RadioButton
+					android:id="@+id/radioImperial"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/unit_fahrenheit"
+					android:textSize="@dimen/text_size_small" />
+			</RadioGroup>
+
+			<TextView
+				android:id="@+id/txtCurrentTemp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/space_large"
+				android:textSize="@dimen/text_size_current_temp"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="25" />
+
+			<TextView
+				android:id="@+id/txtCurrentUnit"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/space_xx_small"
+				android:layout_marginTop="@dimen/space_x_large"
+				android:textSize="@dimen/text_size_xx_large"
+				app:layout_constraintStart_toEndOf="@id/txtCurrentTemp"
+				app:layout_constraintTop_toTopOf="@id/txtCurrentTemp"
+				tools:text="°C" />
+
+			<TextView
+				android:id="@+id/txtMaxAndMinTemp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/space_xxx_small"
+				android:textSize="@dimen/text_size_large"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="@id/txtCurrentTemp"
+				app:layout_constraintTop_toBottomOf="@id/txtCurrentTemp"
+				tools:text="30°C / 25°C" />
+
+			<TextView
+				android:id="@+id/txtDescription"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/space_xxx_small"
+				android:textAllCaps="true"
+				android:textSize="@dimen/text_size_large"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="@id/txtCurrentTemp"
+				app:layout_constraintTop_toBottomOf="@id/txtMaxAndMinTemp"
+				tools:text="overcast clouds" />
 
 			<TextView
 				android:id="@+id/txtSetting"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/view_units_setting"
+				android:textAlignment="textEnd"
 				android:textSize="@dimen/text_size_normal"
 				android:textStyle="bold"
-				android:textAlignment="textEnd"
+				app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
 				app:layout_constraintStart_toStartOf="@id/txtDescription"
-				app:layout_constraintTop_toTopOf="@id/radioGroup"
-				app:layout_constraintBottom_toBottomOf="@+id/radioGroup"/>
-			
-			<RadioGroup
-				android:id="@+id/radioGroup"
-				android:layout_width="0dp"
+				app:layout_constraintTop_toTopOf="@id/radioGroup" />
+
+			<TextView
+				android:id="@+id/btnWholeDay"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/space_xx_large"
-				android:layout_marginStart="@dimen/space_normal"
-				app:layout_constraintTop_toBottomOf="@id/leftLinearLayout"
-				app:layout_constraintStart_toEndOf="@id/txtSetting"
-				app:layout_constraintEnd_toEndOf="parent">
-
-				<RadioButton
-					android:id="@+id/radioMetric"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:buttonTint="@color/orange"
-					android:textColor="?attr/colorPrimary"
-					android:textSize="@dimen/text_size_normal"
-					android:text="@string/unit_celsius"/>
-
-				<RadioButton
-					android:id="@+id/radioImperial"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:buttonTint="@color/orange"
-					android:textColor="?attr/colorPrimary"
-					android:textSize="@dimen/text_size_normal"
-					android:text="@string/unit_fahrenheit"/>
-
-			</RadioGroup>
+				android:text="@string/view_whole_day"
+				android:textColor="@color/orange"
+				android:textSize="@dimen/text_size_normal"
+				android:textStyle="bold"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/radioGroup" />
 
 			<androidx.constraintlayout.widget.Guideline
 				android:id="@+id/guideline"
@@ -265,8 +281,6 @@
 				android:layout_height="wrap_content"
 				android:orientation="vertical"
 				app:layout_constraintGuide_percent="0.5" />
-
 		</androidx.constraintlayout.widget.ConstraintLayout>
-
 	</androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,5 @@
 		android:id="@+id/homeFragment"
 		android:name="com.example.buggyweather.home.presenter.HomeFragment"
 		android:label="fragmentHome"
-		tools:layout="@layout/fragment_home">
-	</fragment>
+		tools:layout="@layout/fragment_home"></fragment>
 </navigation>
