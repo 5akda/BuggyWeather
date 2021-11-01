@@ -32,19 +32,19 @@ class MainViewModel(
 				.onSuccess(::setMeasuringUnits)
 	}
 
-	fun setCityName(cityName: String?) {
-		_cityName.postValue(cityName?: "")
+	fun setCityName(cityName: String) {
+		_cityName.postValue(cityName)
 	}
 
-	fun saveLastCityName(cityName: String?) = viewModelScope.launch {
-		saveLastCityUseCase.execute(cityName?: Constants.DEFAULT_CITY_NAME)
+	fun saveLastCityName() = viewModelScope.launch {
+		saveLastCityUseCase.execute(cityName.value ?: Constants.DEFAULT_CITY_NAME)
 	}
 
 	fun setMeasuringUnits(units: MeasuringUnits) {
 		_measuringUnit.postValue(units)
 	}
 
-	fun saveMeasuringUnits(units: MeasuringUnits) = viewModelScope.launch {
-		saveMeasuringUnitsUseCase.execute(units)
+	fun saveSelectedUnits() = viewModelScope.launch {
+		saveMeasuringUnitsUseCase.execute(measuringUnits.value ?: MeasuringUnits.METRIC)
 	}
 }

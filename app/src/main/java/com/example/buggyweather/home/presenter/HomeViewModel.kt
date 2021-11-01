@@ -20,9 +20,9 @@ class HomeViewModel(
 	val currentWeather: LiveData<CurrentWeather>
 		get() = _currentWeather
 
-	private val _exception = MutableLiveData<String>()
-	val exception: LiveData<String>
-		get() = _exception
+	private val _errorMessage = MutableLiveData<String>()
+	val errorMessage: LiveData<String>
+		get() = _errorMessage
 
 	fun getCurrentWeather(cityName: String,
 	                      measuringUnits: MeasuringUnits?) = viewModelScope.launch {
@@ -40,8 +40,8 @@ class HomeViewModel(
 		when(throwable) {
 			is NotFoundException,
 			is BadRequestException,
-			is RemoteException -> _exception.postValue(throwable.message)
-			else -> _exception.postValue(throwable.message)
+			is RemoteException -> _errorMessage.postValue(throwable.message)
+			else -> _errorMessage.postValue(throwable.message)
 		}
 	}
 }
