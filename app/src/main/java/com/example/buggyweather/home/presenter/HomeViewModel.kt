@@ -1,5 +1,6 @@
 package com.example.buggyweather.home.presenter
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +14,7 @@ import com.example.buggyweather.network.exception.RemoteException
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-		private val getCurrentWeatherUseCase: UseCase<Pair<String, String>, CurrentWeather>
+		private val getCurrentWeatherUseCase: UseCase<Pair<String, MeasuringUnits>, CurrentWeather>
 ) : ViewModel() {
 
 	private val _currentWeather = MutableLiveData<CurrentWeather>()
@@ -24,16 +25,18 @@ class HomeViewModel(
 	val errorMessage: LiveData<String>
 		get() = _errorMessage
 
-	fun getCurrentWeather(cityName: String?,
-	                      measuringUnits: MeasuringUnits?) = viewModelScope.launch {
-		val request = Pair(cityName ?: "", measuringUnits?.name ?: "")
-		runCatching { getCurrentWeatherUseCase.execute(request) }
+	var hasObservedWeather: Boolean = false
+
+	fun getCurrentWeather(pair: Pair<String, MeasuringUnits>) = viewModelScope.launch {
+		Log.e("CALL", "JAAAAAA")
+		runCatching { getCurrentWeatherUseCase.execute(pair) }
 				.onSuccess(::succeedCurrentWeather)
 				.onFailure(::failCurrentWeather)
 	}
 
 	private fun succeedCurrentWeather(currentWeather: CurrentWeather) {
 		_currentWeather.postValue(currentWeather)
+		hasObservedWeather = true
 	}
 
 	private fun failCurrentWeather(throwable: Throwable) {

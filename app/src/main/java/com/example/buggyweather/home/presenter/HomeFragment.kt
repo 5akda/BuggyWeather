@@ -35,24 +35,15 @@ class HomeFragment : BaseFragment() {
 	}
 
 	override fun observeViewModel() {
-		sharedViewModel.cityName.observe(viewLifecycleOwner) { cityName ->
-			binding.txtCityName.setText(cityName)
-			homeViewModel.getCurrentWeather(
-					cityName = cityName,
-					measuringUnits = sharedViewModel.measuringUnits.value
-			)
-		}
 
-		sharedViewModel.measuringUnits.observe(viewLifecycleOwner) { units ->
-			when(units) {
+		sharedViewModel.cityNameAndUnits.observe(this) { pair ->
+			binding.txtCityName.setText(pair.first)
+			when(pair.second) {
 				MeasuringUnits.IMPERIAL -> binding.radioGroup.check(R.id.radioImperial)
 				else -> binding.radioGroup.check(R.id.radioMetric)
 			}
-			homeViewModel.getCurrentWeather(
-					cityName = sharedViewModel.cityName.value,
-					measuringUnits = units
-			)
 			sharedViewModel.saveSelectedUnits()
+			homeViewModel.getCurrentWeather(pair)
 		}
 
 		homeViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
@@ -78,9 +69,11 @@ class HomeFragment : BaseFragment() {
 		}
 
 		binding.radioGroup.setOnCheckedChangeListener { _, i ->
-			when(i) {
-				R.id.radioImperial -> sharedViewModel.setMeasuringUnits(MeasuringUnits.IMPERIAL)
-				else -> sharedViewModel.setMeasuringUnits(MeasuringUnits.METRIC)
+			if(homeViewModel.hasObservedWeather) {
+				when(i) {
+					R.id.radioImperial -> sharedViewModel.setMeasuringUnits(MeasuringUnits.IMPERIAL)
+					else -> sharedViewModel.setMeasuringUnits(MeasuringUnits.METRIC)
+				}
 			}
 		}
 	}
@@ -103,7 +96,7 @@ class HomeFragment : BaseFragment() {
 	}
 
 	private fun bindCurrentWeather(currentWeather: CurrentWeather) {
-		val units = sharedViewModel.measuringUnits.value
+		val units = sharedViewModel.cityNameAndUnits.value?.second
 		binding.apply {
 			txtCurrentTemp.text = currentWeather.airCondition.temp.roundToInt().toString()
 			txtCurrentUnit.text = units?.shortTemp
