@@ -24,9 +24,9 @@ class HomeViewModel(
 	val errorMessage: LiveData<String>
 		get() = _errorMessage
 
-	fun getCurrentWeather(cityName: String,
+	fun getCurrentWeather(cityName: String?,
 	                      measuringUnits: MeasuringUnits?) = viewModelScope.launch {
-		val request = Pair(cityName, measuringUnits?.name ?: MeasuringUnits.METRIC.name)
+		val request = Pair(cityName ?: "", measuringUnits?.name ?: "")
 		runCatching { getCurrentWeatherUseCase.execute(request) }
 				.onSuccess(::succeedCurrentWeather)
 				.onFailure(::failCurrentWeather)

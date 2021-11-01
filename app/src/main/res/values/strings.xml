@@ -1,15 +1,28 @@
 <resources>
 	<string name="app_name">BuggyWeather</string>
 
-	<string name="unit_celsius">Celsius</string>
+	<string name="unit_celsius">Celsius (Metric)</string>
 	<string name="unit_short_celsius">°C</string>
 	<string name="unit_meter_per_sec">m/s</string>
 
-	<string name="unit_fahrenheit">Fahrenheit</string>
+	<string name="unit_fahrenheit">Fahrenheit (Imperial)</string>
 	<string name="unit_short_fahrenheit">°F</string>
 	<string name="unit_miles_per_hour">mph</string>
 
 	<string name="unit_hectopascal">hPa</string>
 	<string name="unit_millimeter">mm</string>
 	<string name="unit_kilometer">km</string>
+
+	<string name="data_temp_max_min">%1$d%2$s / %3$d%2$s</string>
+	<string name="view_humidity">Humidity</string>
+	<string name="data_humidity">%1$d%%</string>
+	<string name="view_feels_like">Feels Like</string>
+	<string name="data_feels_like">%1$d%2$s</string>
+	<string name="view_visibility">Visibility</string>
+	<string name="data_visibility">%1$d km</string>
+	<string name="view_wind">Wind</string>
+	<string name="data_wind">%1$d %2$s</string>
+
+	<string name="view_units_setting">Units\nSetting</string>
+	<string name="view_whole_day"><u>Whole-day forecast</u> ≫</string>
 </resources>

@@ -6,9 +6,9 @@ import com.example.buggyweather.main.repository.MeasuringUnitsDataSource
 
 class SaveMeasuringUnitsUseCase(
 		private val measuringUnitsDataSource: MeasuringUnitsDataSource
-) : UseCase<MeasuringUnits, MeasuringUnits>() {
+) : UseCase<MeasuringUnits, Unit>() {
 
-	override suspend fun create(request: MeasuringUnits): MeasuringUnits {
+	override suspend fun create(request: MeasuringUnits) {
 		return measuringUnitsDataSource.saveUnits(request)
 	}
 }

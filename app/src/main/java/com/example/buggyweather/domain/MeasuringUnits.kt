@@ -14,7 +14,7 @@ enum class MeasuringUnits(
 	),
 	IMPERIAL(
 			format = "imperial",
-			temp = "farenheit",
+			temp = "fahrenheit",
 			shortTemp = "°F",
 			speed = "mph"
 	)

@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.buggyweather.R
 import com.example.buggyweather.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentHomeBinding
 import com.example.buggyweather.domain.CurrentWeather
+import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
+import com.example.buggyweather.utils.hideKeyboard
+import com.example.buggyweather.utils.loadWeatherIcon
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.roundToInt
 
 class HomeFragment : BaseFragment() {
 
@@ -31,11 +36,23 @@ class HomeFragment : BaseFragment() {
 
 	override fun observeViewModel() {
 		sharedViewModel.cityName.observe(viewLifecycleOwner) { cityName ->
-			binding.txtCtiyName.setText(cityName)
+			binding.txtCityName.setText(cityName)
 			homeViewModel.getCurrentWeather(
 					cityName = cityName,
 					measuringUnits = sharedViewModel.measuringUnits.value
 			)
+		}
+
+		sharedViewModel.measuringUnits.observe(viewLifecycleOwner) { units ->
+			when(units) {
+				MeasuringUnits.IMPERIAL -> binding.radioGroup.check(R.id.radioImperial)
+				else -> binding.radioGroup.check(R.id.radioMetric)
+			}
+			homeViewModel.getCurrentWeather(
+					cityName = sharedViewModel.cityName.value,
+					measuringUnits = units
+			)
+			sharedViewModel.saveSelectedUnits()
 		}
 
 		homeViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
@@ -51,10 +68,20 @@ class HomeFragment : BaseFragment() {
 	}
 
 	override fun setupListener() {
+		binding.txtCityName.setOnEditorActionListener { _, _, _ ->
+			processSearch()
+			return@setOnEditorActionListener false
+		}
+
 		binding.btnSearch.setOnClickListener {
-			hideError()
-			showLoading()
-			sharedViewModel.setCityName(binding.txtCtiyName.text.toString())
+			processSearch()
+		}
+
+		binding.radioGroup.setOnCheckedChangeListener { _, i ->
+			when(i) {
+				R.id.radioImperial -> sharedViewModel.setMeasuringUnits(MeasuringUnits.IMPERIAL)
+				else -> sharedViewModel.setMeasuringUnits(MeasuringUnits.METRIC)
+			}
 		}
 	}
 
@@ -76,6 +103,33 @@ class HomeFragment : BaseFragment() {
 	}
 
 	private fun bindCurrentWeather(currentWeather: CurrentWeather) {
-		
+		val units = sharedViewModel.measuringUnits.value
+		binding.apply {
+			txtCurrentTemp.text = currentWeather.airCondition.temp.roundToInt().toString()
+			txtCurrentUnit.text = units?.shortTemp
+			imgCurrentIcon.loadWeatherIcon(currentWeather.weatherDescription[0].icon)
+			txtMaxAndMinTemp.text = getString(R.string.data_temp_max_min,
+					currentWeather.airCondition.tempMax.roundToInt(),
+					units?.shortTemp,
+					currentWeather.airCondition.tempMin.roundToInt())
+			txtDescription.text = currentWeather.weatherDescription[0].description
+			txtHumidity.text = getString(R.string.data_humidity,
+					currentWeather.airCondition.humidity)
+			txtFeelLike.text = getString(R.string.data_feels_like,
+					currentWeather.airCondition.feelsLike.roundToInt(),
+					units?.shortTemp)
+			txtVisibility.text = getString(R.string.data_visibility,
+					currentWeather.visibility/1000)
+			txtWind.text = getString(R.string.data_wind,
+					currentWeather.windCondition.speed.roundToInt(),
+					units?.speed)
+		}
+	}
+
+	private fun processSearch() {
+		binding.root.hideKeyboard()
+		hideError()
+		showLoading()
+		sharedViewModel.setCityName(binding.txtCityName.text.toString())
 	}
 }

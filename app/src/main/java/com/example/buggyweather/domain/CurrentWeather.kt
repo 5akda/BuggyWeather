@@ -10,10 +10,8 @@ data class CurrentWeather(
         val dt: Int,
         @SerializedName("main")
         val airCondition: AirCondition,
-        @SerializedName("rain")
-        val rainCondition: RainCondition? = null,
-        @SerializedName("snow")
-        val snowCondition: SnowCondition? = null,
+        @SerializedName("wind")
+        val windCondition: WindCondition,
         @SerializedName("sys")
         val sunCondition: SunCondition,
         @SerializedName("visibility")

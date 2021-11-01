@@ -7,14 +7,13 @@ class MeasuringUnitsRepository(
 		private val settingSharedPref: SharedPreferences
 ) : MeasuringUnitsDataSource {
 
-	override fun saveUnits(units: MeasuringUnits): MeasuringUnits {
+	override suspend fun saveUnits(units: MeasuringUnits) {
 		settingSharedPref.edit()
 				.putString(KEY_UNITS, units.name)
 				.apply()
-		return getUnits()
 	}
 
-	override fun getUnits(): MeasuringUnits {
+	override suspend fun getUnits(): MeasuringUnits {
 		val savedData = settingSharedPref.getString(KEY_UNITS, MeasuringUnits.METRIC.name)
 		return MeasuringUnits.valueOf(savedData ?: MeasuringUnits.METRIC.name)
 	}
