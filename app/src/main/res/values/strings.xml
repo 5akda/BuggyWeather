@@ -25,4 +25,6 @@
 
 	<string name="view_units_setting">Units\nSetting</string>
 	<string name="view_whole_day"><u>Whole-day forecast</u> ≫</string>
+
+	<string name="view_whole_heading">Whole-day forecast</string>
 </resources>

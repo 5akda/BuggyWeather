@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.MeasuringUnits
-import com.example.buggyweather.utils.Constants
 import kotlinx.coroutines.launch
 
 class MainViewModel(

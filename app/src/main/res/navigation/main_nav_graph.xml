@@ -9,5 +9,24 @@
 		android:id="@+id/homeFragment"
 		android:name="com.example.buggyweather.home.presenter.HomeFragment"
 		android:label="fragmentHome"
-		tools:layout="@layout/fragment_home"></fragment>
+		tools:layout="@layout/fragment_home">
+
+		<action
+			android:id="@+id/navigateToWholeDay"
+			app:destination="@id/wholeDayFragment"
+			app:enterAnim="@anim/nav_default_enter_anim"
+			app:exitAnim="@anim/nav_default_exit_anim"
+			app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+			app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+	</fragment>
+
+	<fragment
+		android:id="@+id/wholeDayFragment"
+		android:name="com.example.buggyweather.whole.presenter.WholeDayFragment"
+		android:label="fragmentWholeDay"
+		tools:layout="@layout/fragment_whole_day">
+
+	</fragment>
+
 </navigation>
