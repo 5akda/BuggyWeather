@@ -1,7 +1,6 @@
 package com.example.buggyweather.utils
 
 import android.icu.text.SimpleDateFormat
-import android.util.Log
 
 fun Int.epochToDateTime(timeShift: Long): String {
 	val timeFormat = SimpleDateFormat("HH:mm")

@@ -8,29 +8,6 @@
 	android:paddingTop="@dimen/space_large"
 	tools:context=".home.presenter.HomeFragment">
 
-	<TextView
-		android:id="@+id/txtCityName"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:layout_marginHorizontal="@dimen/space_xx_small"
-		android:text="@string/view_whole_heading"
-		android:textSize="@dimen/text_size_normal"
-		android:textStyle="bold"
-		android:textAlignment="textEnd"
-		app:layout_constraintBottom_toBottomOf="@id/btnClose"
-		app:layout_constraintStart_toEndOf="@id/btnClose"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toTopOf="@id/btnClose" />
-
-	<ImageButton
-		android:id="@+id/btnClose"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:background="@color/transparent"
-		android:src="@drawable/ic_close_48"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
-
 	<FrameLayout
 		android:id="@+id/errorContainer"
 		android:layout_width="match_parent"
@@ -47,6 +24,15 @@
 			layout="@layout/layout_error" />
 	</FrameLayout>
 
+	<ImageButton
+		android:id="@+id/btnClose"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@color/transparent"
+		android:src="@drawable/ic_close_48"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
 	<ProgressBar
 		android:id="@+id/loading"
 		android:layout_width="match_parent"
@@ -58,13 +44,27 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/btnClose" />
 
+	<TextView
+		android:id="@+id/txtCityName"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/space_xx_small"
+		android:text="@string/view_whole_heading"
+		android:textAlignment="textEnd"
+		android:textSize="@dimen/text_size_normal"
+		android:textStyle="bold"
+		app:layout_constraintBottom_toBottomOf="@id/btnClose"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/btnClose"
+		app:layout_constraintTop_toTopOf="@id/btnClose" />
+
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/recyclerView"
-		android:layout_marginTop="@dimen/space_normal"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
+		android:layout_marginTop="@dimen/space_normal"
 		android:orientation="vertical"
 		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		app:layout_constraintTop_toBottomOf="@id/btnClose"
-		app:layout_constraintBottom_toBottomOf="parent"/>
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/btnClose" />
 </androidx.constraintlayout.widget.ConstraintLayout>
