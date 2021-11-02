@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.buggyweather.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentWholeDayBinding
+import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.utils.epochNumOfHoursToMidNight
+import com.example.buggyweather.whole.presenter.adapter.ForecastListAdapter
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WholeDayFragment : BaseFragment() {
@@ -15,6 +20,9 @@ class WholeDayFragment : BaseFragment() {
 	private lateinit var binding: FragmentWholeDayBinding
 
 	private val wholeDayViewModel: WholeDayViewModel by viewModel()
+	private val sharedViewModel: MainViewModel by sharedViewModel()
+
+	private val listAdapter: ForecastListAdapter by inject()
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 	                          savedInstanceState: Bundle?): View {
@@ -24,11 +32,19 @@ class WholeDayFragment : BaseFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		binding.recyclerView.adapter = listAdapter
+
 		showLoading()
+
 		arguments?.let { bundle ->
+			val coordinate = Coordinate(
+					lat = bundle.getString(BUNDLE_KEY_LAT) ?: "",
+					lon = bundle.getString(BUNDLE_KEY_LON) ?: "",
+			)
 			wholeDayViewModel.getWholeDayForecast(
-					lat = bundle.getString(BUNDLE_KEY_LAT)?:"",
-					lon = bundle.getString(BUNDLE_KEY_LON)?:""
+					coordinate = coordinate,
+					units = sharedViewModel.cityNameAndUnits.value?.second
 			)
 		}
 	}
@@ -73,7 +89,12 @@ class WholeDayFragment : BaseFragment() {
 	private fun displayWeatherList(wholeDay: WholeDayWeather) {
 		val numOfHour = wholeDay.hourlyList[0].dt.epochNumOfHoursToMidNight(wholeDay.timeOffset)
 		val forecastList = wholeDay.hourlyList.subList(0, numOfHour)
-
+		listAdapter.apply {
+			submitList(forecastList)
+			timeShift = wholeDay.timeOffset
+			measuringUnits = sharedViewModel.cityNameAndUnits.value?.second
+			notifyDataSetChanged()
+		}
 	}
 
 	companion object {

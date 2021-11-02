@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.Coordinate
+import com.example.buggyweather.domain.ForecastRequest
+import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.domain.WholeDayWeather
 import com.example.buggyweather.network.exception.RemoteException
 import kotlinx.coroutines.launch
 
 class WholeDayViewModel(
-		private val getWholeDayWeatherUseCase: UseCase<Coordinate, WholeDayWeather>
+		private val getWholeDayWeatherUseCase: UseCase<ForecastRequest, WholeDayWeather>
 ) : ViewModel() {
 
 	private val _errorMessage = MutableLiveData<String>()
@@ -22,8 +24,8 @@ class WholeDayViewModel(
 	val wholeDayForecast: LiveData<WholeDayWeather>
 		get() = _wholeDayForecast
 
-	fun getWholeDayForecast(lat: String, lon: String) = viewModelScope.launch {
-		runCatching { getWholeDayWeatherUseCase.execute(Coordinate(lon = lon, lat = lat)) }
+	fun getWholeDayForecast(coordinate: Coordinate, units: MeasuringUnits?) = viewModelScope.launch {
+		runCatching { getWholeDayWeatherUseCase.execute(ForecastRequest(coordinate, units)) }
 				.onSuccess(::succeedWholeDayWeather)
 				.onFailure(::failWholeDayWeather)
 	}

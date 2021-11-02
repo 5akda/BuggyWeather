@@ -3,9 +3,10 @@ package com.example.buggyweather.whole
 import androidx.arch.core.util.Function
 import com.example.buggyweather.base.KoinModule
 import com.example.buggyweather.base.UseCase
-import com.example.buggyweather.domain.Coordinate
+import com.example.buggyweather.domain.ForecastRequest
 import com.example.buggyweather.domain.WholeDayWeather
 import com.example.buggyweather.whole.presenter.WholeDayViewModel
+import com.example.buggyweather.whole.presenter.adapter.ForecastListAdapter
 import com.example.buggyweather.whole.repository.WholeDayWeatherDataSource
 import com.example.buggyweather.whole.repository.WholeDayWeatherMapper
 import com.example.buggyweather.whole.repository.WholeDayWeatherRepository
@@ -37,11 +38,14 @@ object WholeDayModule : KoinModule {
 		single<WholeDayWeatherDataSource> {
 			WholeDayWeatherRepository(get(), get(named(FORECAST_MAPPER)))
 		}
-		single<UseCase<Coordinate, WholeDayWeather>>(named(FORECAST_USE_CASE)) {
+		single<UseCase<ForecastRequest, WholeDayWeather>>(named(FORECAST_USE_CASE)) {
 			GetWholeDayWeatherUseCase(get())
 		}
 		viewModel {
 			WholeDayViewModel(get(named(FORECAST_USE_CASE)))
+		}
+		single {
+			ForecastListAdapter()
 		}
 	}
 }

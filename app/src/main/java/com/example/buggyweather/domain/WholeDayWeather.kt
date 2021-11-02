@@ -6,5 +6,5 @@ data class WholeDayWeather(
 		@SerializedName("timezone_offset")
 		val timeOffset: Long,
 		@SerializedName("hourly")
-		val hourlyList: List<CurrentWeather>,
+		val hourlyList: List<HourlyWeather>,
 )
