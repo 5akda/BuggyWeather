@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.buggyweather.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentWholeDayBinding
+import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.utils.epochNumOfHoursToMidNight
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WholeDayFragment : BaseFragment() {
@@ -33,7 +35,8 @@ class WholeDayFragment : BaseFragment() {
 
 	override fun observeViewModel() {
 		super.observeViewModel()
-		wholeDayViewModel.wholeDayForecast.observe(this) { forecast ->
+		wholeDayViewModel.wholeDayForecast.observe(this) { wholeDayWeather ->
+			displayWeatherList(wholeDayWeather)
 			hideLoading()
 		}
 
@@ -65,6 +68,12 @@ class WholeDayFragment : BaseFragment() {
 
 	override fun hideError() {
 		binding.errorContainer.visibility = View.GONE
+	}
+
+	private fun displayWeatherList(wholeDay: WholeDayWeather) {
+		val numOfHour = wholeDay.hourlyList[0].dt.epochNumOfHoursToMidNight(wholeDay.timeOffset)
+		val forecastList = wholeDay.hourlyList.subList(0, numOfHour)
+
 	}
 
 	companion object {
