@@ -135,8 +135,8 @@ class HomeFragment : BaseFragment() {
 
 	private fun seeWholeDayForecast(coordinate: Coordinate) {
 		val bundle = Bundle().apply {
-			putDouble(WholeDayFragment.BUNDLE_KEY_LAT, coordinate.lat)
-			putDouble(WholeDayFragment.BUNDLE_KEY_LON, coordinate.lon)
+			putString(WholeDayFragment.BUNDLE_KEY_LAT, coordinate.lat)
+			putString(WholeDayFragment.BUNDLE_KEY_LON, coordinate.lon)
 		}
 		findNavController().navigate(R.id.navigateToWholeDay, bundle)
 	}

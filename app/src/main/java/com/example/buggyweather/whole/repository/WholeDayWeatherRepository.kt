@@ -8,7 +8,7 @@ class WholeDayWeatherRepository(
 		private val service: WholeDayWeatherService,
 		private val mapper: Function<Response<WholeDayWeather>, WholeDayWeather>
 ) : WholeDayWeatherDataSource {
-	override suspend fun getWholeDayWeather(lat: Double, lon: Double): WholeDayWeather {
+	override suspend fun getWholeDayWeather(lat: String, lon: String): WholeDayWeather {
 		return mapper.apply(
 				service.getWholeDayWeather(lat, lon)
 		)

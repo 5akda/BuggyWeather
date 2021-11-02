@@ -11,8 +11,8 @@ interface WholeDayWeatherService {
 
 	@GET("onecall")
 	suspend fun getWholeDayWeather(
-			@Query("lat") lat: Double,
-			@Query("lon") lon: Double,
+			@Query("lat") lat: String,
+			@Query("lon") lon: String,
 			@Query("units") unitsName: String = MeasuringUnits.METRIC.name,
 			@Query("appid") tokenId: String = Constants.TOKEN_ID,
 			@Query("exclude") exclude: String = EXCLUDE_PARAMS

@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.example.buggyweather.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentWholeDayBinding
-import com.example.buggyweather.main.presenter.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WholeDayFragment : BaseFragment() {
@@ -28,9 +25,21 @@ class WholeDayFragment : BaseFragment() {
 		showLoading()
 		arguments?.let { bundle ->
 			wholeDayViewModel.getWholeDayForecast(
-					lat = bundle.getDouble(BUNDLE_KEY_LAT),
-					lon = bundle.getDouble(BUNDLE_KEY_LON)
+					lat = bundle.getString(BUNDLE_KEY_LAT)?:"",
+					lon = bundle.getString(BUNDLE_KEY_LON)?:""
 			)
+		}
+	}
+
+	override fun observeViewModel() {
+		super.observeViewModel()
+		wholeDayViewModel.wholeDayForecast.observe(this) { forecast ->
+			hideLoading()
+		}
+
+		wholeDayViewModel.errorMessage.observe(this) { errorMessage ->
+			hideLoading()
+			showError(errorMessage)
 		}
 	}
 
