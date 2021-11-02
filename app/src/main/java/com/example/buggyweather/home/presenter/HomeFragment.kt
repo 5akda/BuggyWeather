@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.buggyweather.R
 import com.example.buggyweather.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentHomeBinding
+import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.utils.hideKeyboard
 import com.example.buggyweather.utils.loadWeatherIcon
+import com.example.buggyweather.whole.presenter.WholeDayFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
@@ -59,20 +62,25 @@ class HomeFragment : BaseFragment() {
 
 	override fun setupListener() {
 		binding.txtCityName.setOnEditorActionListener { _, _, _ ->
-			processSearch()
+			clickSearch()
 			return@setOnEditorActionListener false
 		}
 
 		binding.btnSearch.setOnClickListener {
-			processSearch()
+			clickSearch()
 		}
 
-		binding.radioGroup.setOnCheckedChangeListener { _, i ->
+		binding.radioGroup.setOnCheckedChangeListener { _, id ->
 			if(homeViewModel.hasObservedWeather) {
-				when(i) {
+				when(id) {
 					R.id.radioImperial -> sharedViewModel.setMeasuringUnits(MeasuringUnits.IMPERIAL)
 					else -> sharedViewModel.setMeasuringUnits(MeasuringUnits.METRIC)
 				}
+			}
+		}
+		binding.btnWholeDay.setOnClickListener {
+			homeViewModel.currentWeather.value?.coordinate?.let { coord ->
+				seeWholeDayForecast(coord)
 			}
 		}
 	}
@@ -118,10 +126,18 @@ class HomeFragment : BaseFragment() {
 		}
 	}
 
-	private fun processSearch() {
+	private fun clickSearch() {
 		binding.root.hideKeyboard()
 		hideError()
 		showLoading()
 		sharedViewModel.setCityName(binding.txtCityName.text.toString())
+	}
+
+	private fun seeWholeDayForecast(coordinate: Coordinate) {
+		val bundle = Bundle().apply {
+			putDouble(WholeDayFragment.BUNDLE_KEY_LAT, coordinate.lat)
+			putDouble(WholeDayFragment.BUNDLE_KEY_LON, coordinate.lon)
+		}
+		findNavController().navigate(R.id.navigateToWholeDay, bundle)
 	}
 }

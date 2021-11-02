@@ -15,10 +15,10 @@
 
 	<dimen name="text_size_small">16sp</dimen>
 	<dimen name="text_size_normal">18sp</dimen>
-	<dimen name="text_size_large">24sp</dimen>
+	<dimen name="text_size_large">22sp</dimen>
 	<dimen name="text_size_x_large">32sp</dimen>
 	<dimen name="text_size_xx_large">48sp</dimen>
 
-	<dimen name="text_size_search">24sp</dimen>
+	<dimen name="text_size_search">26sp</dimen>
 	<dimen name="text_size_current_temp">84sp</dimen>
 </resources>
