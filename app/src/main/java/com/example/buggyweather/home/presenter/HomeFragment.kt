@@ -35,7 +35,6 @@ class HomeFragment : BaseFragment() {
 	}
 
 	override fun observeViewModel() {
-
 		sharedViewModel.cityNameAndUnits.observe(this) { pair ->
 			binding.txtCityName.setText(pair.first)
 			when(pair.second) {

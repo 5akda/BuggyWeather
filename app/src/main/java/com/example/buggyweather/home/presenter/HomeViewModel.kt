@@ -1,6 +1,5 @@
 package com.example.buggyweather.home.presenter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +27,6 @@ class HomeViewModel(
 	var hasObservedWeather: Boolean = false
 
 	fun getCurrentWeather(pair: Pair<String, MeasuringUnits>) = viewModelScope.launch {
-		Log.e("CALL", "JAAAAAA")
 		runCatching { getCurrentWeatherUseCase.execute(pair) }
 				.onSuccess(::succeedCurrentWeather)
 				.onFailure(::failCurrentWeather)
