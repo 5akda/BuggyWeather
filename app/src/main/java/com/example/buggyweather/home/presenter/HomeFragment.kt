@@ -32,8 +32,8 @@ class HomeFragment : BaseFragment() {
 		return binding.root
 	}
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
+	override fun onResume() {
+		super.onResume()
 		showLoading()
 	}
 
@@ -52,6 +52,7 @@ class HomeFragment : BaseFragment() {
 			bindCurrentWeather(currentWeather)
 			sharedViewModel.saveLastCityName()
 			hideLoading()
+			hideError()
 		}
 
 		homeViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
@@ -71,6 +72,7 @@ class HomeFragment : BaseFragment() {
 		}
 
 		binding.radioGroup.setOnCheckedChangeListener { _, id ->
+			showLoading()
 			if(homeViewModel.hasObservedWeather) {
 				when(id) {
 					R.id.radioImperial -> sharedViewModel.setMeasuringUnits(MeasuringUnits.IMPERIAL)
@@ -128,7 +130,6 @@ class HomeFragment : BaseFragment() {
 
 	private fun clickSearch() {
 		binding.root.hideKeyboard()
-		hideError()
 		showLoading()
 		sharedViewModel.setCityName(binding.txtCityName.text.toString())
 	}
