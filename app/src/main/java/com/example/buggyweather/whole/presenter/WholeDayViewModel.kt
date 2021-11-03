@@ -10,6 +10,7 @@ import com.example.buggyweather.domain.ForecastRequest
 import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.domain.WholeDayWeather
 import com.example.buggyweather.network.exception.RemoteException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class WholeDayViewModel(
@@ -24,8 +25,9 @@ class WholeDayViewModel(
 	val wholeDayForecast: LiveData<WholeDayWeather>
 		get() = _wholeDayForecast
 
-	fun getWholeDayForecast(coordinate: Coordinate, units: MeasuringUnits?) = viewModelScope.launch {
-		runCatching { getWholeDayWeatherUseCase.execute(ForecastRequest(coordinate, units)) }
+	fun getWholeDayForecast(coordinate: Coordinate, units: MeasuringUnits?) = viewModelScope.launch(Dispatchers.IO) {
+		val request = ForecastRequest(coordinate, units)
+		runCatching { getWholeDayWeatherUseCase.execute(request) }
 				.onSuccess(::succeedWholeDayWeather)
 				.onFailure(::failWholeDayWeather)
 	}

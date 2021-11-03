@@ -10,6 +10,7 @@ import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.network.exception.BadRequestException
 import com.example.buggyweather.network.exception.NotFoundException
 import com.example.buggyweather.network.exception.RemoteException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -26,7 +27,7 @@ class HomeViewModel(
 
 	var hasObservedWeather: Boolean = false
 
-	fun getCurrentWeather(pair: Pair<String, MeasuringUnits>) = viewModelScope.launch {
+	fun getCurrentWeather(pair: Pair<String, MeasuringUnits>) = viewModelScope.launch(Dispatchers.IO) {
 		runCatching { getCurrentWeatherUseCase.execute(pair) }
 				.onSuccess(::succeedCurrentWeather)
 				.onFailure(::failCurrentWeather)

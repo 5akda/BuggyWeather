@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.MeasuringUnits
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -19,7 +20,7 @@ class MainViewModel(
 	val cityNameAndUnits: LiveData<Pair<String, MeasuringUnits>>
 		get() = _cityNameAndUnits
 
-	fun initCityNameAndUnits() = viewModelScope.launch {
+	fun initCityNameAndUnits() = viewModelScope.launch(Dispatchers.IO) {
 		runCatching {
 			Pair(getLastCityUseCase.execute(Unit), getMeasuringUnitsUseCase.execute(Unit))
 		}.onSuccess(::setCityNameAndUnits)
