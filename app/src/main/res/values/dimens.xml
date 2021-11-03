@@ -13,6 +13,7 @@
 	<dimen name="space_xxx_large">48dp</dimen>
 	<dimen name="space_xxxx_large">96dp</dimen>
 
+	<dimen name="text_size_x_small">14sp</dimen>
 	<dimen name="text_size_small">16sp</dimen>
 	<dimen name="text_size_normal">18sp</dimen>
 	<dimen name="text_size_large">22sp</dimen>

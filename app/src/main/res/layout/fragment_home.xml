@@ -17,6 +17,7 @@
 		android:inputType="textCapWords"
 		android:textSize="@dimen/text_size_search"
 		android:textStyle="bold"
+		android:textColor="?attr/colorOnSecondary"
 		app:layout_constraintBottom_toBottomOf="@id/btnSearch"
 		app:layout_constraintEnd_toStartOf="@id/btnSearch"
 		app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +31,8 @@
 		android:elevation="@dimen/elevation_2"
 		android:outlineProvider="none"
 		android:visibility="gone"
+		android:clickable="true"
+		android:focusable="true"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/btnSearch">
 
@@ -55,6 +58,8 @@
 		android:elevation="@dimen/elevation_2"
 		android:outlineProvider="none"
 		android:visibility="gone"
+		android:clickable="true"
+		android:focusable="true"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/btnSearch" />
 
@@ -194,15 +199,19 @@
 					android:id="@+id/radioMetric"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:textColor="?attr/colorOnSecondary"
+					android:textStyle="bold"
 					android:text="@string/unit_celsius"
-					android:textSize="@dimen/text_size_small" />
+					android:textSize="@dimen/text_size_x_small" />
 
 				<RadioButton
 					android:id="@+id/radioImperial"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:textColor="?attr/colorOnSecondary"
+					android:textStyle="bold"
 					android:text="@string/unit_fahrenheit"
-					android:textSize="@dimen/text_size_small" />
+					android:textSize="@dimen/text_size_x_small" />
 			</RadioGroup>
 
 			<TextView
@@ -256,7 +265,7 @@
 				android:layout_height="wrap_content"
 				android:text="@string/view_units_setting"
 				android:textAlignment="textEnd"
-				android:textSize="@dimen/text_size_normal"
+				android:textSize="@dimen/text_size_small"
 				android:textStyle="bold"
 				app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
 				app:layout_constraintStart_toStartOf="@id/txtDescription"
