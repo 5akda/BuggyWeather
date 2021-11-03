@@ -35,8 +35,6 @@ class WholeDayFragment : BaseFragment() {
 
 		binding.recyclerView.adapter = listAdapter
 
-		showLoading()
-
 		arguments?.let { bundle ->
 			val coordinate = Coordinate(
 					lat = bundle.getString(BUNDLE_KEY_LAT) ?: "",
@@ -47,6 +45,11 @@ class WholeDayFragment : BaseFragment() {
 					units = sharedViewModel.cityNameAndUnits.value?.second
 			)
 		}
+	}
+
+	override fun onResume() {
+		super.onResume()
+		showLoading()
 	}
 
 	override fun observeViewModel() {
