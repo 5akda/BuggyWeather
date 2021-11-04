@@ -14,6 +14,8 @@ import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.utils.hideKeyboard
 import com.example.buggyweather.utils.loadWeatherIcon
+import com.example.buggyweather.utils.visibleIfNotNull
+import com.example.buggyweather.utils.visibleIfTrue
 import com.example.buggyweather.whole.presenter.WholeDayFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,11 +34,6 @@ class HomeFragment : BaseFragment() {
 		return binding.root
 	}
 
-	override fun onResume() {
-		super.onResume()
-		showLoading()
-	}
-
 	override fun observeViewModel() {
 		sharedViewModel.cityNameAndUnits.observe(this) { pair ->
 			binding.txtCityName.setText(pair.first)
@@ -51,13 +48,14 @@ class HomeFragment : BaseFragment() {
 		homeViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
 			bindCurrentWeather(currentWeather)
 			sharedViewModel.saveLastCityName()
-			hideLoading()
-			hideError()
+		}
+
+		homeViewModel.isLoading.observe(viewLifecycleOwner) { isVisible ->
+			binding.loading.visibleIfTrue(isVisible)
 		}
 
 		homeViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-			hideLoading()
-			showError(errorMessage)
+			handleError(errorMessage)
 		}
 	}
 
@@ -72,7 +70,6 @@ class HomeFragment : BaseFragment() {
 		}
 
 		binding.radioGroup.setOnCheckedChangeListener { _, id ->
-			showLoading()
 			if(homeViewModel.hasObservedWeather) {
 				when(id) {
 					R.id.radioImperial -> sharedViewModel.setMeasuringUnits(MeasuringUnits.IMPERIAL)
@@ -87,21 +84,9 @@ class HomeFragment : BaseFragment() {
 		}
 	}
 
-	override fun showLoading() {
-		binding.loading.visibility = View.VISIBLE
-	}
-
-	override fun hideLoading() {
-		binding.loading.visibility = View.GONE
-	}
-
-	override fun showError(message: String) {
+	override fun handleError(message: String?) {
 		binding.error.errorMessage.text = message
-		binding.errorContainer.visibility = View.VISIBLE
-	}
-
-	override fun hideError() {
-		binding.errorContainer.visibility = View.GONE
+		binding.errorContainer.visibleIfNotNull(message)
 	}
 
 	private fun bindCurrentWeather(currentWeather: CurrentWeather) {
@@ -130,7 +115,6 @@ class HomeFragment : BaseFragment() {
 
 	private fun clickSearch() {
 		binding.root.hideKeyboard()
-		showLoading()
 		sharedViewModel.setCityName(binding.txtCityName.text.toString())
 	}
 
