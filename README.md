@@ -2,7 +2,7 @@
 
 Download โปรเจค หรือ `$ git clone https://github.com/parzival48/BuggyWeather.git`
 
-ใช้ Branch **master** `$ git check out master`
+ใช้ Branch **master** `$ git checkout master`
 
 Note: Run บน Emulator หรือ Device ที่เป็น Android 7.0 ขึ้นไป
 
