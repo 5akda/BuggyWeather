@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.buggyweather.base.BaseViewModel
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.ForecastRequest
@@ -15,17 +16,15 @@ import kotlinx.coroutines.launch
 
 class WholeDayViewModel(
 		private val getWholeDayWeatherUseCase: UseCase<ForecastRequest, WholeDayWeather>
-) : ViewModel() {
-
-	private val _errorMessage = MutableLiveData<String>()
-	val errorMessage: LiveData<String>
-		get() = _errorMessage
+) : BaseViewModel() {
 
 	private val _wholeDayForecast = MutableLiveData<WholeDayWeather>()
 	val wholeDayForecast: LiveData<WholeDayWeather>
 		get() = _wholeDayForecast
 
 	fun getWholeDayForecast(coordinate: Coordinate, units: MeasuringUnits?) = viewModelScope.launch(Dispatchers.IO) {
+		stateLoading.postValue(true)
+		stateErrorMessage.postValue(null)
 		val request = ForecastRequest(coordinate, units)
 		runCatching { getWholeDayWeatherUseCase.execute(request) }
 				.onSuccess(::succeedWholeDayWeather)
@@ -33,13 +32,15 @@ class WholeDayViewModel(
 	}
 
 	private fun succeedWholeDayWeather(forecast: WholeDayWeather) {
+		stateLoading.postValue(false)
 		_wholeDayForecast.postValue(forecast)
 	}
 
 	private fun failWholeDayWeather(throwable: Throwable) {
+		stateLoading.postValue(false)
 		when(throwable) {
-			is RemoteException -> _errorMessage.postValue(throwable.message)
-			else -> _errorMessage.postValue(throwable.message)
+			is RemoteException -> stateErrorMessage.postValue(throwable.message)
+			else -> stateErrorMessage.postValue(throwable.message)
 		}
 	}
 }

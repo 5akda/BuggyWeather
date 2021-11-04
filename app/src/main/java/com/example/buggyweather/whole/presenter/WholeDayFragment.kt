@@ -10,6 +10,8 @@ import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.WholeDayWeather
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.utils.epochNumOfHoursToMidNight
+import com.example.buggyweather.utils.visibleIfNotNull
+import com.example.buggyweather.utils.visibleIfTrue
 import com.example.buggyweather.whole.presenter.adapter.ForecastListAdapter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -47,21 +49,18 @@ class WholeDayFragment : BaseFragment() {
 		}
 	}
 
-	override fun onResume() {
-		super.onResume()
-		showLoading()
-	}
-
 	override fun observeViewModel() {
 		super.observeViewModel()
-		wholeDayViewModel.wholeDayForecast.observe(this) { wholeDayWeather ->
+		wholeDayViewModel.wholeDayForecast.observe(viewLifecycleOwner) { wholeDayWeather ->
 			displayWeatherList(wholeDayWeather)
-			hideLoading()
 		}
 
-		wholeDayViewModel.errorMessage.observe(this) { errorMessage ->
-			hideLoading()
-			showError(errorMessage)
+		wholeDayViewModel.isLoading.observe(viewLifecycleOwner) { isVisible ->
+			binding.loading.visibleIfTrue(isVisible)
+		}
+
+		wholeDayViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+			handleError(errorMessage)
 		}
 	}
 
@@ -72,21 +71,9 @@ class WholeDayFragment : BaseFragment() {
 		}
 	}
 
-	override fun showLoading() {
-		binding.loading.visibility = View.VISIBLE
-	}
-
-	override fun hideLoading() {
-		binding.loading.visibility = View.GONE
-	}
-
-	override fun showError(message: String) {
+	override fun handleError(message: String?) {
 		binding.error.errorMessage.text = message
-		binding.errorContainer.visibility = View.VISIBLE
-	}
-
-	override fun hideError() {
-		binding.errorContainer.visibility = View.GONE
+		binding.errorContainer.visibleIfNotNull(message)
 	}
 
 	private fun displayWeatherList(wholeDay: WholeDayWeather) {

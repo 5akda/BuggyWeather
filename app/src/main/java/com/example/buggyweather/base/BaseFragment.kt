@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
 
-	protected open fun showLoading() {}
-	protected open fun hideLoading() {}
-	protected open fun showError(message: String) {}
-	protected open fun hideError() {}
+	protected open fun handleError(message: String?) {}
 	protected open fun observeViewModel() {}
 	protected open fun setupListener() {}
 

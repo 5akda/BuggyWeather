@@ -2,8 +2,8 @@ package com.example.buggyweather.home.presenter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.buggyweather.base.BaseViewModel
 import com.example.buggyweather.base.UseCase
 import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.domain.MeasuringUnits
@@ -15,19 +15,17 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
 		private val getCurrentWeatherUseCase: UseCase<Pair<String, MeasuringUnits>, CurrentWeather>
-) : ViewModel() {
+) : BaseViewModel() {
 
 	private val _currentWeather = MutableLiveData<CurrentWeather>()
 	val currentWeather: LiveData<CurrentWeather>
 		get() = _currentWeather
 
-	private val _errorMessage = MutableLiveData<String>()
-	val errorMessage: LiveData<String>
-		get() = _errorMessage
-
 	var hasObservedWeather: Boolean = false
 
 	fun getCurrentWeather(pair: Pair<String, MeasuringUnits>) = viewModelScope.launch(Dispatchers.IO) {
+		stateLoading.postValue(true)
+		stateErrorMessage.postValue(null)
 		runCatching { getCurrentWeatherUseCase.execute(pair) }
 				.onSuccess(::succeedCurrentWeather)
 				.onFailure(::failCurrentWeather)
@@ -36,14 +34,16 @@ class HomeViewModel(
 	private fun succeedCurrentWeather(currentWeather: CurrentWeather) {
 		_currentWeather.postValue(currentWeather)
 		hasObservedWeather = true
+		stateLoading.postValue(false)
 	}
 
 	private fun failCurrentWeather(throwable: Throwable) {
 		when(throwable) {
 			is NotFoundException,
 			is BadRequestException,
-			is RemoteException -> _errorMessage.postValue(throwable.message)
-			else -> _errorMessage.postValue(throwable.message)
+			is RemoteException -> stateErrorMessage.postValue(throwable.message)
+			else -> stateErrorMessage.postValue(throwable.message)
 		}
+		stateLoading.postValue(false)
 	}
 }
