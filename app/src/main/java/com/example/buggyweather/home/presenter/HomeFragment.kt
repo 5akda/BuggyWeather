@@ -107,23 +107,23 @@ class HomeFragment : BaseFragment() {
 	private fun bindCurrentWeather(currentWeather: CurrentWeather) {
 		val units = sharedViewModel.cityNameAndUnits.value?.second
 		binding.apply {
-			txtCurrentTemp.text = currentWeather.airCondition.temp.roundToInt().toString()
+			txtCurrentTemp.text = currentWeather.airCondition?.temp?.roundToInt().toString()
 			txtCurrentUnit.text = units?.shortTemp
 			imgCurrentIcon.loadWeatherIcon(currentWeather.weatherDescription[0].icon)
 			txtMaxAndMinTemp.text = getString(R.string.data_temp_max_min,
-					currentWeather.airCondition.tempMax.roundToInt(),
+					currentWeather.airCondition?.tempMax?.roundToInt(),
 					units?.shortTemp,
-					currentWeather.airCondition.tempMin.roundToInt())
+					currentWeather.airCondition?.tempMin?.roundToInt())
 			txtDescription.text = currentWeather.weatherDescription[0].description
 			txtHumidity.text = getString(R.string.data_humidity,
-					currentWeather.airCondition.humidity)
+					currentWeather.airCondition?.humidity)
 			txtFeelLike.text = getString(R.string.data_feels_like,
-					currentWeather.airCondition.feelsLike.roundToInt(),
+					currentWeather.airCondition?.feelsLike?.roundToInt(),
 					units?.shortTemp)
 			txtVisibility.text = getString(R.string.data_visibility,
 					currentWeather.visibility/1000)
 			txtWind.text = getString(R.string.data_wind,
-					currentWeather.windCondition.speed.roundToInt(),
+					currentWeather.windCondition?.speed?.roundToInt(),
 					units?.speed)
 		}
 	}

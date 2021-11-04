@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class CurrentWeather(
         @SerializedName("dt")
-        val dt: Int,
+        val dt: Int = 0,
         @SerializedName("main")
-        val airCondition: AirCondition,
+        val airCondition: AirCondition? = null,
         @SerializedName("wind")
-        val windCondition: WindCondition,
+        val windCondition: WindCondition? = null,
         @SerializedName("visibility")
-        val visibility: Int,
+        val visibility: Int = 0,
         @SerializedName("weather")
-        val weatherDescription: List<WeatherDescription>,
+        val weatherDescription: List<WeatherDescription> = listOf(),
         @SerializedName("cloud")
-        val cloudCondition: CloudCondition,
+        val cloudCondition: CloudCondition? = null,
         @SerializedName("coord")
-        val coordinate: Coordinate
+        val coordinate: Coordinate? = null
 )
