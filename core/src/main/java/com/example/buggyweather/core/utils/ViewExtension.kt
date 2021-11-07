@@ -1,4 +1,4 @@
-package com.example.buggyweather.utils
+package com.example.buggyweather.core.utils
 
 import android.app.Activity
 import android.view.View

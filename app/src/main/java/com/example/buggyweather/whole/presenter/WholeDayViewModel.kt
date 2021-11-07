@@ -9,7 +9,7 @@ import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.ForecastRequest
 import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.domain.WholeDayWeather
-import com.example.buggyweather.network.exception.RemoteException
+import com.example.buggyweather.core.network.exception.RemoteException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

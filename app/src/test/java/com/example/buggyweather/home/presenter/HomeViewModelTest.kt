@@ -5,8 +5,8 @@ import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.helper.getOrAwaitValue
-import com.example.buggyweather.network.KnownExceptionMessage
-import com.example.buggyweather.network.exception.BadRequestException
+import com.example.buggyweather.core.network.KnownExceptionMessage
+import com.example.buggyweather.core.network.exception.BadRequestException
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.verify

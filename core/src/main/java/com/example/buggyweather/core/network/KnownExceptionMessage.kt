@@ -1,4 +1,4 @@
-package com.example.buggyweather.network
+package com.example.buggyweather.core.network
 
 object KnownExceptionMessage {
 	const val COMMON = "Something went wrong"

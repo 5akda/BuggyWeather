@@ -50,7 +50,6 @@ dependencies {
     testImplementation tests
     implementation retrofit
     implementation koin
-    implementation glide
     implementation navigation
 
     implementation project(':core')

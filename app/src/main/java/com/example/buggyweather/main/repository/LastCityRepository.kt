@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.repository
 
 import android.content.SharedPreferences
-import com.example.buggyweather.utils.Constants
+import com.example.buggyweather.core.utils.Constants
 
 class LastCityRepository(
 		private val settingSharedPref: SharedPreferences

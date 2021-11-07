@@ -3,9 +3,9 @@ package com.example.buggyweather.home.repository
 import androidx.arch.core.util.Function
 import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.helper.BaseTest
-import com.example.buggyweather.network.exception.BadRequestException
-import com.example.buggyweather.network.exception.NotFoundException
-import com.example.buggyweather.network.exception.RemoteException
+import com.example.buggyweather.core.network.exception.BadRequestException
+import com.example.buggyweather.core.network.exception.NotFoundException
+import com.example.buggyweather.core.network.exception.RemoteException
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert
 import org.junit.Before

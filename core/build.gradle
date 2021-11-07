@@ -37,4 +37,6 @@ dependencies {
     androidTestImplementation androidTests
     testImplementation tests
     implementation koin
+    implementation retrofit
+    implementation glide
 }

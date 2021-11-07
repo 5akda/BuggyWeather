@@ -3,7 +3,7 @@ package com.example.buggyweather
 import android.app.Application
 import com.example.buggyweather.home.HomeModule
 import com.example.buggyweather.main.MainModule
-import com.example.buggyweather.network.NetworkModule
+import com.example.buggyweather.core.network.NetworkModule
 import com.example.buggyweather.core.preference.SharedPreferenceModule
 import com.example.buggyweather.whole.WholeDayModule
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +19,6 @@ class BuggyWeatherApp : Application() {
 			androidContext(this@BuggyWeatherApp)
 			androidLogger()
 			modules(
-					NetworkModule.provide(),
 					MainModule.provide(),
 					HomeModule.provide(),
 					WholeDayModule.provide()
@@ -27,5 +26,6 @@ class BuggyWeatherApp : Application() {
 		}
 
 		SharedPreferenceModule.init()
+		NetworkModule.init()
 	}
 }

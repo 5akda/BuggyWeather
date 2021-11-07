@@ -9,9 +9,9 @@ import com.example.buggyweather.databinding.FragmentWholeDayBinding
 import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.WholeDayWeather
 import com.example.buggyweather.main.presenter.MainViewModel
-import com.example.buggyweather.utils.epochNumOfHoursToMidNight
-import com.example.buggyweather.utils.visibleIfNotNull
-import com.example.buggyweather.utils.visibleIfTrue
+import com.example.buggyweather.core.utils.epochNumOfHoursToMidNight
+import com.example.buggyweather.core.utils.visibleIfNotNull
+import com.example.buggyweather.core.utils.visibleIfTrue
 import com.example.buggyweather.whole.presenter.adapter.ForecastListAdapter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel

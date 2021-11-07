@@ -1,4 +1,4 @@
-package com.example.buggyweather.utils
+package com.example.buggyweather.core.utils
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

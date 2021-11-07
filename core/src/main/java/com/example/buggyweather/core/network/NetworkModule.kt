@@ -1,9 +1,10 @@
-package com.example.buggyweather.network
+package com.example.buggyweather.core.network
 
 import com.example.buggyweather.core.base.KoinModule
-import com.example.buggyweather.utils.Constants
+import com.example.buggyweather.core.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -33,4 +34,6 @@ object NetworkModule: KoinModule {
 		single { createClient() }
 		single { createRetrofit(get()) }
 	}
+
+	fun init() = loadKoinModules(provide())
 }

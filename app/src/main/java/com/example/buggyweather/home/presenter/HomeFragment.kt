@@ -12,10 +12,10 @@ import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
-import com.example.buggyweather.utils.hideKeyboard
-import com.example.buggyweather.utils.loadWeatherIcon
-import com.example.buggyweather.utils.visibleIfNotNull
-import com.example.buggyweather.utils.visibleIfTrue
+import com.example.buggyweather.core.utils.hideKeyboard
+import com.example.buggyweather.core.utils.loadWeatherIcon
+import com.example.buggyweather.core.utils.visibleIfNotNull
+import com.example.buggyweather.core.utils.visibleIfTrue
 import com.example.buggyweather.whole.presenter.WholeDayFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
