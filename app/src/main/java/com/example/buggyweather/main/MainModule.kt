@@ -12,7 +12,7 @@ import com.example.buggyweather.main.usecase.GetLastCityUseCase
 import com.example.buggyweather.main.usecase.GetMeasuringUnitsUseCase
 import com.example.buggyweather.main.usecase.SaveLastCityUseCase
 import com.example.buggyweather.main.usecase.SaveMeasuringUnitsUseCase
-import com.example.buggyweather.preference.SharedPreferenceModule
+import com.example.buggyweather.core.preference.SharedPreferenceModule
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.core.qualifier.named
