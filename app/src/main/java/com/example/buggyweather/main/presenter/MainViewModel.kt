@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.buggyweather.base.UseCase
+import com.example.buggyweather.core.base.UseCase
 import com.example.buggyweather.domain.MeasuringUnits
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

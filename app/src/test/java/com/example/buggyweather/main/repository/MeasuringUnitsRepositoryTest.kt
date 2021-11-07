@@ -23,7 +23,7 @@ class MeasuringUnitsRepositoryTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		repository = MeasuringUnitsRepository(sharedPref)
 	}
 

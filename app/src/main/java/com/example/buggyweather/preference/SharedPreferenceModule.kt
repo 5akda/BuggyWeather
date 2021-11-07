@@ -2,7 +2,7 @@ package com.example.buggyweather.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.buggyweather.base.KoinModule
+import com.example.buggyweather.core.base.KoinModule
 import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

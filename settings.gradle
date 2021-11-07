@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BuggyWeather"
 include ':app'
+include ':core'

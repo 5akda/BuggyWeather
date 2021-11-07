@@ -1,6 +1,6 @@
 package com.example.buggyweather.whole.usecase
 
-import com.example.buggyweather.base.UseCase
+import com.example.buggyweather.core.base.UseCase
 import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.ForecastRequest
 import com.example.buggyweather.domain.MeasuringUnits
@@ -30,7 +30,7 @@ class GetWholeDayWeatherUseCaseTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		useCase = GetWholeDayWeatherUseCase(dataSource)
 	}
 

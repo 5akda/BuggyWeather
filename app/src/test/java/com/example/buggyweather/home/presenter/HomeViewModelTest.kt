@@ -1,6 +1,6 @@
 package com.example.buggyweather.home.presenter
 
-import com.example.buggyweather.base.UseCase
+import com.example.buggyweather.core.base.UseCase
 import com.example.buggyweather.domain.CurrentWeather
 import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.helper.BaseTest
@@ -28,7 +28,7 @@ class HomeViewModelTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		viewModel = HomeViewModel(useCase)
 	}
 

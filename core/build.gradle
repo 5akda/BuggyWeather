@@ -1,7 +1,6 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-parcelize'
 }
 
 apply from: "$project.rootDir/common.gradle"
@@ -10,13 +9,10 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.buggyweather"
         minSdk 24
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -32,26 +28,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     androidTestImplementation androidTests
     testImplementation tests
-    implementation retrofit
     implementation koin
-    implementation glide
-    implementation navigation
-
-    implementation project(':core')
 }

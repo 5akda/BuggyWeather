@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.buggyweather.base.BaseFragment
+import com.example.buggyweather.core.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentWholeDayBinding
 import com.example.buggyweather.domain.Coordinate
 import com.example.buggyweather.domain.WholeDayWeather

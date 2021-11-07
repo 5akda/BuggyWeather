@@ -1,4 +1,4 @@
-package com.example.buggyweather.base
+package com.example.buggyweather.core.base
 
 abstract class UseCase<REQUEST, RESPONSE> {
 

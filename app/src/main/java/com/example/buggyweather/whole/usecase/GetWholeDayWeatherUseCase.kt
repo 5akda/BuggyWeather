@@ -1,6 +1,6 @@
 package com.example.buggyweather.whole.usecase
 
-import com.example.buggyweather.base.UseCase
+import com.example.buggyweather.core.base.UseCase
 import com.example.buggyweather.domain.ForecastRequest
 import com.example.buggyweather.domain.WholeDayWeather
 import com.example.buggyweather.whole.repository.WholeDayWeatherDataSource

@@ -1,6 +1,6 @@
 package com.example.buggyweather.network
 
-import com.example.buggyweather.base.KoinModule
+import com.example.buggyweather.core.base.KoinModule
 import com.example.buggyweather.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

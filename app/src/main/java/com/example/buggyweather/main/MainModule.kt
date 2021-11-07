@@ -1,7 +1,7 @@
 package com.example.buggyweather.main
 
-import com.example.buggyweather.base.KoinModule
-import com.example.buggyweather.base.UseCase
+import com.example.buggyweather.core.base.KoinModule
+import com.example.buggyweather.core.base.UseCase
 import com.example.buggyweather.domain.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.main.repository.LastCityDataSource

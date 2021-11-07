@@ -1,6 +1,6 @@
 package com.example.buggyweather.main.usecase
 
-import com.example.buggyweather.base.UseCase
+import com.example.buggyweather.core.base.UseCase
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.main.repository.LastCityDataSource
 import com.nhaarman.mockitokotlin2.verify
@@ -20,7 +20,7 @@ class SaveLastCityUseCaseTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		useCase = SaveLastCityUseCase(dataSource)
 	}
 
