@@ -1,7 +1,7 @@
 package com.example.buggyweather.whole.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.core.domain.WholeDayWeather
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.core.network.exception.RemoteException
 import okhttp3.ResponseBody.Companion.toResponseBody

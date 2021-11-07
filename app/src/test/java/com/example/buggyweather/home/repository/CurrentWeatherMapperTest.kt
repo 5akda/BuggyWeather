@@ -1,7 +1,7 @@
 package com.example.buggyweather.home.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.domain.CurrentWeather
+import com.example.buggyweather.core.domain.CurrentWeather
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.core.network.exception.BadRequestException
 import com.example.buggyweather.core.network.exception.NotFoundException

@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.buggyweather.core.base.BaseViewModel
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.domain.CurrentWeather
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.CurrentWeather
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.core.network.exception.BadRequestException
 import com.example.buggyweather.core.network.exception.NotFoundException
 import com.example.buggyweather.core.network.exception.RemoteException

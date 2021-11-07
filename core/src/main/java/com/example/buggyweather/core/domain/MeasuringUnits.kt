@@ -1,4 +1,4 @@
-package com.example.buggyweather.domain
+package com.example.buggyweather.core.domain
 
 enum class MeasuringUnits(
 		val format: String,

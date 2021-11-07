@@ -3,8 +3,8 @@ package com.example.buggyweather.whole
 import androidx.arch.core.util.Function
 import com.example.buggyweather.core.base.KoinModule
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.domain.ForecastRequest
-import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.core.domain.ForecastRequest
+import com.example.buggyweather.core.domain.WholeDayWeather
 import com.example.buggyweather.whole.presenter.WholeDayViewModel
 import com.example.buggyweather.whole.presenter.adapter.ForecastListAdapter
 import com.example.buggyweather.whole.repository.WholeDayWeatherDataSource

@@ -1,7 +1,7 @@
 package com.example.buggyweather.whole.repository
 
-import com.example.buggyweather.domain.MeasuringUnits
-import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.WholeDayWeather
 import com.example.buggyweather.core.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET

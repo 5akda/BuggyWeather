@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.buggyweather.databinding.ItemForecastBinding
-import com.example.buggyweather.domain.HourlyWeather
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.HourlyWeather
+import com.example.buggyweather.core.domain.MeasuringUnits
 
 class ForecastListAdapter : ListAdapter<HourlyWeather, ForecastListViewHolder>(ForecastListDiffCallback()) {
 

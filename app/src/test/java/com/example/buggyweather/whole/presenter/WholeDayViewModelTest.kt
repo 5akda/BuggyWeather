@@ -1,10 +1,10 @@
 package com.example.buggyweather.whole.presenter
 
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.domain.Coordinate
-import com.example.buggyweather.domain.ForecastRequest
-import com.example.buggyweather.domain.MeasuringUnits
-import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.core.domain.Coordinate
+import com.example.buggyweather.core.domain.ForecastRequest
+import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.WholeDayWeather
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.helper.getOrAwaitValue
 import com.example.buggyweather.core.network.KnownExceptionMessage

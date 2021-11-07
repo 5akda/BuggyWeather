@@ -1,4 +1,4 @@
-package com.example.buggyweather.domain
+package com.example.buggyweather.core.domain
 
 data class ForecastRequest(
 		val coordinate: Coordinate,

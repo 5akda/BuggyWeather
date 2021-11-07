@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.presenter
 
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.helper.getOrAwaitValue
 import com.nhaarman.mockitokotlin2.doReturn

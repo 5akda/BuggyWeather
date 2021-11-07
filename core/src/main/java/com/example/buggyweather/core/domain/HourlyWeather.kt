@@ -1,4 +1,4 @@
-package com.example.buggyweather.domain
+package com.example.buggyweather.core.domain
 
 
 import com.google.gson.annotations.SerializedName

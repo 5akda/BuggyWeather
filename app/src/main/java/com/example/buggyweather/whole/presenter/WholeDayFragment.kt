@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.buggyweather.core.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentWholeDayBinding
-import com.example.buggyweather.domain.Coordinate
-import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.core.domain.Coordinate
+import com.example.buggyweather.core.domain.WholeDayWeather
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.core.utils.epochNumOfHoursToMidNight
 import com.example.buggyweather.core.utils.visibleIfNotNull

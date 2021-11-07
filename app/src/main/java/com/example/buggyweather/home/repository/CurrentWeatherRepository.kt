@@ -1,7 +1,7 @@
 package com.example.buggyweather.home.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.domain.CurrentWeather
+import com.example.buggyweather.core.domain.CurrentWeather
 import retrofit2.Response
 
 class CurrentWeatherRepository(

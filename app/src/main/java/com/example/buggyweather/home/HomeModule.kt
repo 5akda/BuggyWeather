@@ -3,8 +3,8 @@ package com.example.buggyweather.home
 import androidx.arch.core.util.Function
 import com.example.buggyweather.core.base.KoinModule
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.domain.CurrentWeather
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.CurrentWeather
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.home.presenter.HomeViewModel
 import com.example.buggyweather.home.repository.CurrentWeatherDataSource
 import com.example.buggyweather.home.repository.CurrentWeatherMapper

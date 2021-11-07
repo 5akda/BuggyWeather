@@ -8,9 +8,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.buggyweather.R
 import com.example.buggyweather.core.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentHomeBinding
-import com.example.buggyweather.domain.Coordinate
-import com.example.buggyweather.domain.CurrentWeather
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.Coordinate
+import com.example.buggyweather.core.domain.CurrentWeather
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.core.utils.hideKeyboard
 import com.example.buggyweather.core.utils.loadWeatherIcon
