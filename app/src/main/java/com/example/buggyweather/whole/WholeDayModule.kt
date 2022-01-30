@@ -1,10 +1,10 @@
 package com.example.buggyweather.whole
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.core.base.KoinModule
 import com.example.buggyweather.core.base.UseCase
 import com.example.buggyweather.core.domain.ForecastRequest
 import com.example.buggyweather.core.domain.WholeDayWeather
+import com.example.buggyweather.whole.presenter.WholeDayFragment
 import com.example.buggyweather.whole.presenter.WholeDayViewModel
 import com.example.buggyweather.whole.presenter.adapter.ForecastListAdapter
 import com.example.buggyweather.whole.repository.WholeDayWeatherDataSource
@@ -19,33 +19,30 @@ import org.koin.dsl.module
 import retrofit2.Response
 import retrofit2.Retrofit
 
-object WholeDayModule : KoinModule {
-
-	private const val FORECAST_MAPPER = "FORECAST_MAPPER"
-	private const val FORECAST_USE_CASE = "FORECAST_USE_CASE"
-
-	private fun createWholeDayWeatherService(retrofit: Retrofit): WholeDayWeatherService {
-		return retrofit.create(WholeDayWeatherService::class.java)
+val wholeDayModule = module {
+	single {
+		createWholeDayWeatherService(get())
 	}
-
-	override fun provide(): Module = module {
-		single {
-			createWholeDayWeatherService(get())
-		}
-		single<Function<Response<WholeDayWeather>, WholeDayWeather>>(named(FORECAST_MAPPER)) {
-			WholeDayWeatherMapper()
-		}
-		single<WholeDayWeatherDataSource> {
-			WholeDayWeatherRepository(get(), get(named(FORECAST_MAPPER)))
-		}
-		single<UseCase<ForecastRequest, WholeDayWeather>>(named(FORECAST_USE_CASE)) {
-			GetWholeDayWeatherUseCase(get())
-		}
-		viewModel {
-			WholeDayViewModel(get(named(FORECAST_USE_CASE)))
-		}
-		single {
-			ForecastListAdapter()
-		}
+	single<Function<Response<WholeDayWeather>, WholeDayWeather>>(named(FORECAST_MAPPER)) {
+		WholeDayWeatherMapper()
+	}
+	single<WholeDayWeatherDataSource> {
+		WholeDayWeatherRepository(get(), get(named(FORECAST_MAPPER)))
+	}
+	single<UseCase<ForecastRequest, WholeDayWeather>>(named(FORECAST_USE_CASE)) {
+		GetWholeDayWeatherUseCase(get())
+	}
+	viewModel {
+		WholeDayViewModel(get(named(FORECAST_USE_CASE)))
+	}
+	single {
+		ForecastListAdapter()
 	}
 }
+
+private fun createWholeDayWeatherService(retrofit: Retrofit): WholeDayWeatherService {
+	return retrofit.create(WholeDayWeatherService::class.java)
+}
+
+private const val FORECAST_MAPPER = "FORECAST_MAPPER"
+private const val FORECAST_USE_CASE = "FORECAST_USE_CASE"

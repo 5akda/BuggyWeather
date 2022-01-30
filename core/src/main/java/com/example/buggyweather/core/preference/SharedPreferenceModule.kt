@@ -2,23 +2,17 @@ package com.example.buggyweather.core.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.buggyweather.core.base.KoinModule
-import org.koin.core.context.loadKoinModules
-import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-object SharedPreferenceModule : KoinModule {
-
-	const val FEATURE_SETTING = "feature_setting"
-
-	private fun createSharedPreference(context: Context, feature: String): SharedPreferences {
-		return context.getSharedPreferences(feature, Context.MODE_PRIVATE)
+val sharedPreferenceModule = module {
+	single(named(FEATURE_SETTING)) {
+		createSharedPref(get())
 	}
-
-	override fun provide(): Module = module {
-		single(named(FEATURE_SETTING)) { createSharedPreference(get(), FEATURE_SETTING) }
-	}
-
-	fun init() = loadKoinModules(provide())
 }
+
+private fun createSharedPref(context: Context): SharedPreferences {
+	return context.getSharedPreferences(FEATURE_SETTING, Context.MODE_PRIVATE)
+}
+
+const val FEATURE_SETTING = "feature_setting"
