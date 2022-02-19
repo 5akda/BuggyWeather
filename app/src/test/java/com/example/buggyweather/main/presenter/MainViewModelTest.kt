@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.presenter
 
-import com.example.buggyweather.base.UseCase
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.base.UseCase
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.helper.getOrAwaitValue
 import com.nhaarman.mockitokotlin2.doReturn
@@ -30,7 +30,7 @@ class MainViewModelTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		viewModel = MainViewModel(
 				getSelectedUnitsUseCase,
 				saveSelectedUnitsUseCase,

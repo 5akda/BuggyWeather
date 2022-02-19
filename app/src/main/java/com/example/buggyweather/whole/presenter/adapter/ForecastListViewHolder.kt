@@ -2,10 +2,10 @@ package com.example.buggyweather.whole.presenter.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buggyweather.databinding.ItemForecastBinding
-import com.example.buggyweather.domain.HourlyWeather
-import com.example.buggyweather.domain.MeasuringUnits
-import com.example.buggyweather.utils.epochToDateTime
-import com.example.buggyweather.utils.loadWeatherIcon
+import com.example.buggyweather.core.domain.HourlyWeather
+import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.utils.epochToDateTime
+import com.example.buggyweather.core.utils.loadWeatherIcon
 import kotlin.math.roundToInt
 
 class ForecastListViewHolder(

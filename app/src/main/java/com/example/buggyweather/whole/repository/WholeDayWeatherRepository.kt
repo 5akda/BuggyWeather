@@ -1,9 +1,9 @@
 package com.example.buggyweather.whole.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.domain.ForecastRequest
-import com.example.buggyweather.domain.MeasuringUnits
-import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.core.domain.ForecastRequest
+import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.WholeDayWeather
 import retrofit2.Response
 
 class WholeDayWeatherRepository(

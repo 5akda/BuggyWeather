@@ -1,13 +1,12 @@
 package com.example.buggyweather.home.usecase
 
-import com.example.buggyweather.base.UseCase
-import com.example.buggyweather.domain.CurrentWeather
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.base.UseCase
+import com.example.buggyweather.core.domain.CurrentWeather
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.home.repository.CurrentWeatherDataSource
-import com.example.buggyweather.network.KnownExceptionMessage
-import com.example.buggyweather.network.exception.NotFoundException
-import com.example.buggyweather.network.exception.RemoteException
+import com.example.buggyweather.core.network.KnownExceptionMessage
+import com.example.buggyweather.core.network.exception.NotFoundException
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.verify
@@ -29,7 +28,7 @@ class GetCurrentWeatherUseCaseTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		useCase = GetCurrentWeatherUseCase(dataSource)
 	}
 

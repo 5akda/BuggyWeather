@@ -1,11 +1,11 @@
 package com.example.buggyweather.home.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.domain.CurrentWeather
-import com.example.buggyweather.network.KnownExceptionMessage
-import com.example.buggyweather.network.exception.BadRequestException
-import com.example.buggyweather.network.exception.NotFoundException
-import com.example.buggyweather.network.exception.RemoteException
+import com.example.buggyweather.core.domain.CurrentWeather
+import com.example.buggyweather.core.network.KnownExceptionMessage
+import com.example.buggyweather.core.network.exception.BadRequestException
+import com.example.buggyweather.core.network.exception.NotFoundException
+import com.example.buggyweather.core.network.exception.RemoteException
 import retrofit2.Response
 import java.net.HttpURLConnection
 

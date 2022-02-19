@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.repository
 
 import android.content.SharedPreferences
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.helper.BaseTest
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.verify
@@ -23,7 +23,7 @@ class MeasuringUnitsRepositoryTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		repository = MeasuringUnitsRepository(sharedPref)
 	}
 

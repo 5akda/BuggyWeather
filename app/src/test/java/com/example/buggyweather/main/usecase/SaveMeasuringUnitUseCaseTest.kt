@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.usecase
 
-import com.example.buggyweather.base.UseCase
-import com.example.buggyweather.domain.MeasuringUnits
+import com.example.buggyweather.core.base.UseCase
+import com.example.buggyweather.core.domain.MeasuringUnits
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.main.repository.MeasuringUnitsDataSource
 import com.nhaarman.mockitokotlin2.verify
@@ -21,7 +21,7 @@ class SaveMeasuringUnitUseCaseTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		useCase = SaveMeasuringUnitsUseCase(dataSource)
 	}
 

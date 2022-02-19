@@ -1,13 +1,13 @@
 package com.example.buggyweather.whole.usecase
 
-import com.example.buggyweather.base.UseCase
-import com.example.buggyweather.domain.Coordinate
-import com.example.buggyweather.domain.ForecastRequest
-import com.example.buggyweather.domain.MeasuringUnits
-import com.example.buggyweather.domain.WholeDayWeather
+import com.example.buggyweather.core.base.UseCase
+import com.example.buggyweather.core.domain.Coordinate
+import com.example.buggyweather.core.domain.ForecastRequest
+import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.domain.WholeDayWeather
 import com.example.buggyweather.helper.BaseTest
-import com.example.buggyweather.network.KnownExceptionMessage
-import com.example.buggyweather.network.exception.NotFoundException
+import com.example.buggyweather.core.network.KnownExceptionMessage
+import com.example.buggyweather.core.network.exception.NotFoundException
 import com.example.buggyweather.whole.repository.WholeDayWeatherDataSource
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
@@ -30,7 +30,7 @@ class GetWholeDayWeatherUseCaseTest : BaseTest() {
 
 	@Before
 	fun setUp() {
-		MockitoAnnotations.initMocks(this)
+		MockitoAnnotations.openMocks(this)
 		useCase = GetWholeDayWeatherUseCase(dataSource)
 	}
 
