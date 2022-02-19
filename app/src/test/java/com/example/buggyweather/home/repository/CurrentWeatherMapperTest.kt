@@ -1,7 +1,7 @@
 package com.example.buggyweather.home.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.core.domain.CurrentWeather
+import com.example.buggyweather.core.model.CurrentWeather
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.core.network.exception.BadRequestException
 import com.example.buggyweather.core.network.exception.NotFoundException
@@ -22,7 +22,7 @@ class CurrentWeatherMapperTest : BaseTest() {
 	}
 
 	@Test
-	fun getWeather_test_success() {
+	fun `Map Success Response`() {
 		val response = Response.success(CurrentWeather())
 
 		val result = mapper.apply(response)
@@ -31,7 +31,7 @@ class CurrentWeatherMapperTest : BaseTest() {
 	}
 
 	@Test(expected = BadRequestException::class)
-	fun getWeather_test_400Fail() {
+	fun `Map 400 Error to BadRequestException`() {
 		val emptyBody = "".toResponseBody()
 		val response = Response.error<CurrentWeather>(400, emptyBody)
 
@@ -39,7 +39,7 @@ class CurrentWeatherMapperTest : BaseTest() {
 	}
 
 	@Test(expected = NotFoundException::class)
-	fun getWeather_test_404Fail() {
+	fun `Map 404 Error to NotFoundException`() {
 		val emptyBody = "".toResponseBody()
 		val response = Response.error<CurrentWeather>(404, emptyBody)
 
@@ -47,7 +47,7 @@ class CurrentWeatherMapperTest : BaseTest() {
 	}
 
 	@Test(expected = RemoteException::class)
-	fun getWeather_test_500Fail() {
+	fun `Map 500 Error to RemoteException`() {
 		val emptyBody = "".toResponseBody()
 		val response = Response.error<CurrentWeather>(500, emptyBody)
 

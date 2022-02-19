@@ -8,9 +8,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.buggyweather.R
 import com.example.buggyweather.core.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentHomeBinding
-import com.example.buggyweather.core.domain.Coordinate
-import com.example.buggyweather.core.domain.CurrentWeather
-import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.model.Coordinate
+import com.example.buggyweather.core.model.CurrentWeather
+import com.example.buggyweather.core.model.MeasuringUnits
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.core.utils.hideKeyboard
 import com.example.buggyweather.core.utils.loadWeatherIcon
@@ -50,8 +50,9 @@ class HomeFragment : BaseFragment() {
 			sharedViewModel.saveLastCityName()
 		}
 
-		homeViewModel.isLoading.observe(viewLifecycleOwner) { isVisible ->
-			binding.loading.visibleIfTrue(isVisible)
+		homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+			binding.loading.visibleIfTrue(isLoading)
+			binding.btnSearch.isClickable = isLoading.not()
 		}
 
 		homeViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->

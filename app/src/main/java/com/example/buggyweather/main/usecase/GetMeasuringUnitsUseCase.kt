@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.usecase
 
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.model.MeasuringUnits
 import com.example.buggyweather.main.repository.MeasuringUnitsDataSource
 
 class GetMeasuringUnitsUseCase(

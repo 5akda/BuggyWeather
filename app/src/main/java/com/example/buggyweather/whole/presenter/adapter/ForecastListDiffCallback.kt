@@ -1,7 +1,7 @@
 package com.example.buggyweather.whole.presenter.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.buggyweather.core.domain.HourlyWeather
+import com.example.buggyweather.core.model.HourlyWeather
 
 class ForecastListDiffCallback : DiffUtil.ItemCallback<HourlyWeather>() {
 

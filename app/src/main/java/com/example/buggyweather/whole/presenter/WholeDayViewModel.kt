@@ -4,42 +4,55 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.buggyweather.core.base.BaseViewModel
-import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.core.domain.Coordinate
-import com.example.buggyweather.core.domain.ForecastRequest
-import com.example.buggyweather.core.domain.MeasuringUnits
-import com.example.buggyweather.core.domain.WholeDayWeather
+import com.example.buggyweather.core.base.FlowUseCase
+import com.example.buggyweather.core.model.Coordinate
+import com.example.buggyweather.core.model.ForecastRequest
+import com.example.buggyweather.core.model.MeasuringUnits
+import com.example.buggyweather.core.model.WholeDayWeather
+import com.example.buggyweather.core.network.KnownExceptionMessage
 import com.example.buggyweather.core.network.exception.RemoteException
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class WholeDayViewModel(
-		private val getWholeDayWeatherUseCase: UseCase<ForecastRequest, WholeDayWeather>
+		private val getWholeDayWeatherUseCase: FlowUseCase<ForecastRequest, WholeDayWeather>
 ) : BaseViewModel() {
 
 	private val _wholeDayForecast = MutableLiveData<WholeDayWeather>()
 	val wholeDayForecast: LiveData<WholeDayWeather>
 		get() = _wholeDayForecast
 
-	fun getWholeDayForecast(coordinate: Coordinate, units: MeasuringUnits?) = viewModelScope.launch(Dispatchers.IO) {
-		stateLoading.postValue(true)
-		stateErrorMessage.postValue(null)
-		val request = ForecastRequest(coordinate, units)
-		runCatching { getWholeDayWeatherUseCase.execute(request) }
-				.onSuccess(::succeedWholeDayWeather)
-				.onFailure(::failWholeDayWeather)
+	fun getWholeDayForecast(coordinate: Coordinate, units: MeasuringUnits?) {
+		viewModelScope.launch {
+			val request = ForecastRequest(coordinate, units)
+			getWholeDayWeatherUseCase.execute(request)
+				.onStart {
+					showLoading()
+					clearErrorMessage()
+				}
+				.onCompletion {
+					hideLoading()
+				}
+				.catch { error ->
+					failWholeDayWeather(error)
+				}
+				.collect { forecast ->
+					succeedWholeDayWeather(forecast)
+				}
+		}
 	}
 
 	private fun succeedWholeDayWeather(forecast: WholeDayWeather) {
-		stateLoading.postValue(false)
 		_wholeDayForecast.postValue(forecast)
 	}
 
 	private fun failWholeDayWeather(throwable: Throwable) {
-		stateLoading.postValue(false)
 		when(throwable) {
-			is RemoteException -> stateErrorMessage.postValue(throwable.message)
-			else -> stateErrorMessage.postValue(throwable.message)
+			is RemoteException -> postErrorMessage(throwable.message)
+			else -> postErrorMessage(KnownExceptionMessage.COMMON)
 		}
 	}
 }

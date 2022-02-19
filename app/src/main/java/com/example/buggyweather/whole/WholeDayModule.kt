@@ -1,10 +1,10 @@
 package com.example.buggyweather.whole
 
 import androidx.arch.core.util.Function
+import com.example.buggyweather.core.base.FlowUseCase
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.core.domain.ForecastRequest
-import com.example.buggyweather.core.domain.WholeDayWeather
-import com.example.buggyweather.whole.presenter.WholeDayFragment
+import com.example.buggyweather.core.model.ForecastRequest
+import com.example.buggyweather.core.model.WholeDayWeather
 import com.example.buggyweather.whole.presenter.WholeDayViewModel
 import com.example.buggyweather.whole.presenter.adapter.ForecastListAdapter
 import com.example.buggyweather.whole.repository.WholeDayWeatherDataSource
@@ -12,8 +12,8 @@ import com.example.buggyweather.whole.repository.WholeDayWeatherMapper
 import com.example.buggyweather.whole.repository.WholeDayWeatherRepository
 import com.example.buggyweather.whole.repository.WholeDayWeatherService
 import com.example.buggyweather.whole.usecase.GetWholeDayWeatherUseCase
+import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Response
@@ -27,10 +27,16 @@ val wholeDayModule = module {
 		WholeDayWeatherMapper()
 	}
 	single<WholeDayWeatherDataSource> {
-		WholeDayWeatherRepository(get(), get(named(FORECAST_MAPPER)))
+		WholeDayWeatherRepository(
+			service = get(),
+			mapper = get(named(FORECAST_MAPPER))
+		)
 	}
-	single<UseCase<ForecastRequest, WholeDayWeather>>(named(FORECAST_USE_CASE)) {
-		GetWholeDayWeatherUseCase(get())
+	single<FlowUseCase<ForecastRequest, WholeDayWeather>>(named(FORECAST_USE_CASE)) {
+		GetWholeDayWeatherUseCase(
+			repository = get(),
+			ioDispatcher = Dispatchers.IO
+		)
 	}
 	viewModel {
 		WholeDayViewModel(get(named(FORECAST_USE_CASE)))

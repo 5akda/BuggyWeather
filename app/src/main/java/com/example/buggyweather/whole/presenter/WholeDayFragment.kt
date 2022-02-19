@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.buggyweather.core.base.BaseFragment
 import com.example.buggyweather.databinding.FragmentWholeDayBinding
-import com.example.buggyweather.core.domain.Coordinate
-import com.example.buggyweather.core.domain.WholeDayWeather
+import com.example.buggyweather.core.model.Coordinate
+import com.example.buggyweather.core.model.WholeDayWeather
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.core.utils.epochNumOfHoursToMidNight
 import com.example.buggyweather.core.utils.visibleIfNotNull
@@ -77,8 +77,7 @@ class WholeDayFragment : BaseFragment() {
 	}
 
 	private fun displayWeatherList(wholeDay: WholeDayWeather) {
-		val numOfHour = wholeDay.hourlyList[0].dt.epochNumOfHoursToMidNight(wholeDay.timeOffset)
-		val forecastList = wholeDay.hourlyList.subList(0, numOfHour)
+		val forecastList = wholeDay.hourlyList.subList(0, 24)
 		listAdapter.apply {
 			submitList(forecastList)
 			timeShift = wholeDay.timeOffset

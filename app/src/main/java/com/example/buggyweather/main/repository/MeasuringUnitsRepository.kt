@@ -1,7 +1,7 @@
 package com.example.buggyweather.main.repository
 
 import android.content.SharedPreferences
-import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.model.MeasuringUnits
 
 class MeasuringUnitsRepository(
 		private val settingSharedPref: SharedPreferences

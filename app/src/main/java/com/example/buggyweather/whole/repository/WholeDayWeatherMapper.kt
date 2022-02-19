@@ -1,7 +1,7 @@
 package com.example.buggyweather.whole.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.core.domain.WholeDayWeather
+import com.example.buggyweather.core.model.WholeDayWeather
 import com.example.buggyweather.core.network.KnownExceptionMessage
 import com.example.buggyweather.core.network.exception.RemoteException
 import retrofit2.Response
