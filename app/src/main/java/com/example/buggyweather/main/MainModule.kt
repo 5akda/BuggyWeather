@@ -1,7 +1,7 @@
 package com.example.buggyweather.main
 
 import com.example.buggyweather.core.base.UseCase
-import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.model.MeasuringUnits
 import com.example.buggyweather.core.preference.FEATURE_SETTING
 import com.example.buggyweather.main.presenter.MainViewModel
 import com.example.buggyweather.main.repository.LastCityDataSource

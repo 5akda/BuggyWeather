@@ -1,8 +1,9 @@
 package com.example.buggyweather.whole.repository
 
-import com.example.buggyweather.core.domain.ForecastRequest
-import com.example.buggyweather.core.domain.WholeDayWeather
+import com.example.buggyweather.core.model.ForecastRequest
+import com.example.buggyweather.core.model.WholeDayWeather
+import kotlinx.coroutines.flow.Flow
 
 interface WholeDayWeatherDataSource {
-	suspend fun getWholeDayWeather(request: ForecastRequest): WholeDayWeather
+	fun getWholeDayWeather(request: ForecastRequest): Flow<WholeDayWeather>
 }

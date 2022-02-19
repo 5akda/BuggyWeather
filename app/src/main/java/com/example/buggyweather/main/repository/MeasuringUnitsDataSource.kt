@@ -1,6 +1,6 @@
 package com.example.buggyweather.main.repository
 
-import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.model.MeasuringUnits
 
 interface MeasuringUnitsDataSource {
 

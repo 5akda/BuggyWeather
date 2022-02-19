@@ -1,7 +1,7 @@
 package com.example.buggyweather.whole.repository
 
 import androidx.arch.core.util.Function
-import com.example.buggyweather.core.domain.WholeDayWeather
+import com.example.buggyweather.core.model.WholeDayWeather
 import com.example.buggyweather.helper.BaseTest
 import com.example.buggyweather.core.network.exception.RemoteException
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -20,7 +20,7 @@ class WholeDayWeatherMapperTest : BaseTest() {
 	}
 
 	@Test
-	fun getForecasts_test_success() {
+	fun `Map Success Response`() {
 		val response = Response.success(WholeDayWeather())
 
 		val result = mapper.apply(response)
@@ -29,7 +29,7 @@ class WholeDayWeatherMapperTest : BaseTest() {
 	}
 
 	@Test(expected = RemoteException::class)
-	fun getWeather_test_Fail() {
+	fun `Map Error to Exception`() {
 		val emptyBody = "".toResponseBody()
 		val response = Response.error<WholeDayWeather>(503, emptyBody)
 

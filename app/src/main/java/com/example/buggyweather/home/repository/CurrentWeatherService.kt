@@ -1,7 +1,7 @@
 package com.example.buggyweather.home.repository
 
-import com.example.buggyweather.core.domain.CurrentWeather
-import com.example.buggyweather.core.domain.MeasuringUnits
+import com.example.buggyweather.core.model.CurrentWeather
+import com.example.buggyweather.core.model.MeasuringUnits
 import com.example.buggyweather.core.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
