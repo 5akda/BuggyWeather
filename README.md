@@ -1,6 +1,6 @@
 ## BuggyWeather
 
-Download โปรเจค หรือ `$ git clone https://github.com/parzival48/BuggyWeather.git`
+Download โปรเจค หรือ `$ git clone https://github.com/5akda/BuggyWeather.git`
 
 ใช้ Branch **master** `$ git checkout master`
 
